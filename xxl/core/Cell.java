@@ -16,13 +16,16 @@ public class Cell implements Serializable{
     public Cell( int row, int column){
         _row = row;
         _column = column;
+        _content = null;
     }
 
     void setContent( Content c){
         _content = c;
     }
 
-    // FIXME implement value()
+    Literal<?> value(){
+        return _content.value();
+    }
     
     public String toString(){
         return _row + ";" + _column + "|" + _content;
