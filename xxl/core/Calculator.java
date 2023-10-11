@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import xxl.core.exception.ImportFileException;
 import xxl.core.exception.MissingFileAssociationException;
 import xxl.core.exception.UnavailableFileException;
-import xxl.core.exception.UnrecognizedEntryException;
+import xxl.core.exception.EntryException;
 
 // FIXME import classes
 
