@@ -20,7 +20,6 @@ class DoSave extends Command<Calculator> {
   @Override
   protected final void execute() {
     
-    System.out.println("Isto devia estar a guardar");
     // If the receiver is already saved, no need to save it again.
     if(!_receiver.isUnsaved())
       return;

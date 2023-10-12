@@ -13,21 +13,18 @@ public class Add extends BinaryFunction {
         _arg2 = arg2;     
     }
  
-    protected Literal<Integer> compute() {
+    /* 
+    protected Literal compute() {
         
-        
-        if (_arg1 instanceof LiteralInteger && _arg2 instanceof LiteralInteger) {
-            Literal<Integer> intArg1 = (LiteralInteger) _arg1;
-            Literal<Integer> intArg2 = (LiteralInteger) _arg2;
-            // Perform the addition
-            int result = intArg1.asInt() + intArg2.asInt();
-            return result;
+        if (_arg1 instanceof LiteralInteger && _arg2 instanceof LiteralInteger) { 
+            // Perform the addition      
         } else {
             // Handles the case where the arguments are not integers
             toString();
         } 
         
     }
+    */
 }
 
 

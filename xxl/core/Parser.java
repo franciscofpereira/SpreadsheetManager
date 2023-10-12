@@ -35,7 +35,7 @@ class Parser {
   }
 
 
-  private void parseDimensions(BufferedReader reader) {
+  private void parseDimensions(BufferedReader reader) throws IOException, UnrecognizedEntryException {
     int rows = -1;
     int columns = -1;
     
@@ -78,17 +78,17 @@ class Parser {
 
 
   // parse the begining of an expression
-  Content parseContent(String contentSpecification) {
+  Content parseContent(String contentSpecification) throws UnrecognizedEntryException {
     char c = contentSpecification.charAt(0);
 
     if (c == '=')
-      parseContentExpression(contentSpecification.substring(1));
+      return parseContentExpression(contentSpecification.substring(1));
     else
-      parseLiteral(contentSpecification);
+      return parseLiteral(contentSpecification);
   }
 
 
-  private Literal<?> parseLiteral(String literalExpression) throws UnrecognizedEntryException {
+  private Content parseLiteral(String literalExpression) throws UnrecognizedEntryException {
     
     if (literalExpression.charAt(0) == '\'')        // Literal is a string
       return new LiteralString(literalExpression);
@@ -129,10 +129,10 @@ class Parser {
     Content arg1 = parseArgumentExpression(arguments[1]);
     
     return switch (functionName) {
-      case "ADD" -> new Add function with (arg0, arg1);
-      case "SUB" -> new Sub function with (arg0, arg1);         // FIXME implement Function class
-      case "MUL" -> new Mul function with (arg0, arg1);
-      case "DIV" -> new Div function with (arg0, arg1);
+      case "ADD" -> new Add(arg0, arg1);
+      case "SUB" -> new Sub(arg0, arg1);         // FIXME implement Function class
+      case "MUL" -> new Mul(arg0, arg1);
+      case "DIV" -> new Div(arg0, arg1);
       default -> dar erro com função inválida: functionName ;
     };
   }
@@ -146,8 +146,9 @@ class Parser {
       return parseLiteral(argExpression);
   }
 
+  /* 
   private Content parseIntervalFunction(String functionName, String rangeDescription)
-    throws UnrecognizedEntryException /* , more exceptions ? */ {
+    throws UnrecognizedEntryException // , more exceptions ?  {
     Range range = _spreadsheet.buildRange(rangeDescription);
     return switch (functionName) {
       case "CONCAT" -> new Concat com range 
@@ -157,6 +158,8 @@ class Parser {
       default -> dar erro com função inválida: functionName;
     };
   }
+*/
+
 
   /* Na classe Spreadsheet preciso de algo com a seguinte funcionalidade
   Range createRange(String range) throws ? {

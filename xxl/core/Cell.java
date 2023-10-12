@@ -23,7 +23,7 @@ public class Cell implements Serializable{
         _content = c;
     }
 
-    Literal<?> value(){
+    Literal value(){
         return _content.value();
     }
     

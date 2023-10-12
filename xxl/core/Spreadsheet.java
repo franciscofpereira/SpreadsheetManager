@@ -67,7 +67,13 @@ public class Spreadsheet implements Serializable {
    * @param contentSpecification the specification in a string format of the content to put
    *        in the specified cell.
    */
-  public void insertContent(int row, int column, String contentSpecification) throws UnrecognizedEntryException /* FIXME maybe add exceptions */ {
+  public void insertContent(int row, int column, Content contentSpecification) throws UnrecognizedEntryException /* FIXME maybe add exceptions */ {
+    
+    try{
+      getCell(row, column).setContent(contentSpecification);
+    } catch (InvalidCellException ice){
+      System.err.println("Failed to insert content. Invalid cell coordinates: " + row + ";" + column);
+    }
     //FIXME implement method
   }
 }

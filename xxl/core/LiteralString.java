@@ -1,25 +1,27 @@
 package xxl.core;
 
-public class LiteralString extends Literal<String> {
+public class LiteralString extends Literal {
     
-
+    private String _value;
 
     public LiteralString(String value){
-        super(value);
+        _value = value;
     }
 
     public String toString(){
-        String value = getValue();
-        return value;
+        return _value;
     }
 
+    public String asString(){
+        return "'" + _value;
+    }
+    
+    // FIXME isto vai dar throw a uma exception
     //public Integer asInt(){
-    //    Integer value = getValue();
     //    return value;
     //}
 
-    //public String asString(){
-    //}
+    
 
    
 }

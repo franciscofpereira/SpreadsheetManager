@@ -1,23 +1,11 @@
 package xxl.core;
 
-public abstract class Literal<T> extends Content {
+public abstract class Literal extends Content {
 
-    protected T _value;
-    
-    public Literal(T value){
-        if (value instanceof String || value instanceof Integer) {
-            _value = value;
-        } else {
-            throw new IllegalArgumentException("Literals must be either String or Integer");
-        }
-    }
-    
     @Override
-    Literal<?> value(){
+    Literal value(){
         return this;
     }
 
-    protected T getValue(){
-        return _value;
     }
-}
+

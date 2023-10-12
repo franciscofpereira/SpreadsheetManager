@@ -19,12 +19,12 @@ public class Reference extends Content{
         return _row + ";" + _column;
     }
 
-    Literal<?> value(){
+    Literal value(){
         
         try{
             return _spreadsheet.getCell(_row, _column).value();
         }catch (InvalidCellException ice){
-            System.err.println("Error in Reference class: Invalid cell referenced.");    
+            System.err.println("Error in Reference class. Invalid cell referenced: " + _row + ";" + _column);    
         }
         
         return null;

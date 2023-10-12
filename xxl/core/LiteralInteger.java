@@ -1,22 +1,22 @@
 package xxl.core;
 
-public class LiteralInteger extends Literal<Integer> {
+public class LiteralInteger extends Literal {
     
+    private int _value;
     
     public LiteralInteger(Integer value){
-        super(value);                           // calls superclass constructor
+        _value = value;                           
     }
 
     public String toString(){
-        Integer value = getValue();
-        return "" + value;
+        return "" + _value;
     }
 
     public int asInt(){
-        int value = getValue().intValue();
-        return value;
+        return _value;
     }
 
+    // FIXME isto vai dar throw a uma exception
     //public String asString(){
     //}
     

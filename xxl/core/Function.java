@@ -4,15 +4,15 @@ public abstract class Function extends Content {
    
     private String _functionName;
 
-    protected abstract Literal<?> compute();    // Computes the result of the function
+    protected abstract Literal compute();    // Computes the result of the function
 
-    //public String asString(){
-    //}
+    public String asString(){
+    }
 
     //public int asInt(){
 
     //}
 
-    //public Literal<?> value(){   
-    //}
+    public Literal value(){   
+    }
 }
