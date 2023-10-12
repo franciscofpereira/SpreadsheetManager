@@ -23,7 +23,7 @@ public class Spreadsheet implements Serializable {
   public Spreadsheet( int rows, int columns){     // Spreadsheet Constructor
     _numRows = rows;
     _numColumns = columns;
-    _changed = false;                             // Initializes 'changed' state to false
+    //_changed = false;                             // Initializes 'changed' state to false
     _cells = new Cell[rows][columns];             // Initializes cells array
     createCells();                                // Invokes the method that creates the Spreadsheet's Cell objects
   }
