@@ -19,6 +19,7 @@ class DoNew extends Command<Calculator> {
   
   @Override
   protected final void execute() throws CommandException {
+    @SuppressWarnings("unused")
     Spreadsheet spreadsheet = _receiver.createSpreadsheet(integerField("Rows"),integerField("Columns") );
   }
 }
