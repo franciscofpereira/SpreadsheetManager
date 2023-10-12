@@ -28,7 +28,7 @@ public class Calculator implements Serializable {
   //private Calculator _calculator = this;
   
   // Something was changed since last save
-  private boolean _unsaved = false;
+  private boolean _unsaved = true;
   
   
   // FIXME add more fields and methods if needed
