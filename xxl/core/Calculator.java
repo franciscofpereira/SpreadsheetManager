@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import xxl.core.exception.ImportFileException;
 import xxl.core.exception.MissingFileAssociationException;
 import xxl.core.exception.UnavailableFileException;
-import xxl.core.exception.EntryException;
+import xxl.core.exception.UnrecognizedEntryException;
 
 // FIXME import classes
 
@@ -78,4 +78,11 @@ public class Calculator {
    //   throw new ImportFileException(filename, e);
     //}
   } 
+
+  public Spreadsheet createSpreadsheet(int rows, int columns){
+  return new Spreadsheet(rows, columns);
+  //FIXME implement stuff regarding User
+  }
 }
+
+

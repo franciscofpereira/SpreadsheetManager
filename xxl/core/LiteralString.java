@@ -2,6 +2,8 @@ package xxl.core;
 
 public class LiteralString extends Literal<String> {
     
+
+
     public LiteralString(String value){
         super(value);
     }
@@ -19,8 +21,5 @@ public class LiteralString extends Literal<String> {
     //public String asString(){
     //}
 
-    @Override
-    Literal<String> value(){
-        return this;
-    }
+   
 }

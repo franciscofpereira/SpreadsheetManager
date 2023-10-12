@@ -6,15 +6,13 @@ public abstract class Function extends Content {
 
     protected abstract Literal<?> compute();    // Computes the result of the function
 
-    public String asString(){
-
-    }
+    //public String asString(){
+    //}
 
     //public int asInt(){
 
     //}
 
-    public Literal<?> value(){
-        
-    }
+    //public Literal<?> value(){   
+    //}
 }

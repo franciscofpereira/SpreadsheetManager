@@ -2,6 +2,7 @@ package xxl.core;
 
 public class LiteralInteger extends Literal<Integer> {
     
+    
     public LiteralInteger(Integer value){
         super(value);                           // calls superclass constructor
     }
@@ -11,18 +12,13 @@ public class LiteralInteger extends Literal<Integer> {
         return "" + value;
     }
 
-    public Integer asInt(){
-        Integer value = getValue();
+    public int asInt(){
+        int value = getValue().intValue();
         return value;
     }
 
     //public String asString(){
     //}
-    
-    @Override
-    Literal<Integer> value(){
-        return this;
-    }
     
     
 }

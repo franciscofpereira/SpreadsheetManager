@@ -16,7 +16,7 @@ public abstract class Content implements Serializable {
         // FIXME implement method
     //}
 
-    //public Integer asInt(){
+    //public int asInt(){
         // FIXME implement method
     //}
 }
