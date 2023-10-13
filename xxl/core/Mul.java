@@ -18,7 +18,9 @@ public class Mul extends BinaryFunction {
             int result = _arg1.asInt() * _arg2.asInt();
             return new LiteralInteger(result);
 
-        } else {
+        } 
+        
+        else {
             // Handles the case where the arguments are not integers
             //toString();
             return null;  //FIXME

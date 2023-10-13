@@ -6,19 +6,22 @@ public abstract class BinaryFunction extends Function {
     protected Content _arg2;
 
     public BinaryFunction(Content arg1, Content arg2) {
-        
-        if ((arg1 instanceof Reference || arg1 instanceof Literal) &&
-            (arg2 instanceof Reference || arg2 instanceof Literal)) {
-            // Arguments are of the correct type, proceed.
-            _arg1 = arg1;
-            _arg2 = arg2;
-        } else {
-            this.toString();
-            //throw new IllegalArgumentException("Binary functions require literals or references as arguments.");
+        // Check if arg1 is either a LiteralInteger or a Reference, if not throws exception.
+        if (!(arg1 instanceof LiteralInteger || arg1 instanceof Reference)) {
+            throw new IllegalArgumentException("arg1 must be a LiteralInteger or Reference.");
         }
+        
+        // Check if arg2 is neither a LiteralInteger nor a Reference
+        if (!(arg2 instanceof LiteralInteger || arg2 instanceof Reference)) {
+            throw new IllegalArgumentException("arg2 must be a LiteralInteger or Reference.");
+        }
+    
+        _arg1 = arg1;
+        _arg2 = arg2;
     }
+    
 
     public String toString(){
-        return "#VALUE";
+        return null;
     }
 }

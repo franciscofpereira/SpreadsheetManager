@@ -16,7 +16,12 @@ public class Reference extends Content{
     }
     
     public String toString(){
-        return _row + ";" + _column;
+        
+        if(value() == null){
+            return "#VALUE=" + _row + ";" + _column ;
+        }
+        
+        return value() + "";
     }
 
     Literal value(){

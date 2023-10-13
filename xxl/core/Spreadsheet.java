@@ -5,8 +5,8 @@ package xxl.core;
 import java.io.Serial;
 import java.io.Serializable;
 
+import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.exception.InvalidCellException;
-import xxl.core.exception.InvalidRangeException;
 import xxl.core.exception.UnrecognizedEntryException;
 
 /**
@@ -20,6 +20,7 @@ public class Spreadsheet implements Serializable {
   private int _numColumns;
   //private boolean _changed;
   private Cell[][] _cells;
+  //private User _user;
 
   public Spreadsheet( int rows, int columns){     // Spreadsheet Constructor
     _numRows = rows;
@@ -29,7 +30,7 @@ public class Spreadsheet implements Serializable {
     createCells();                                // Invokes the method that creates the Spreadsheet's Cell objects
   }
 
-  // Creates the spreadsheet's cells
+  // Creates the spreadsheet's cells objects
   public void createCells(){                      
     for(int row = 1; row <= _numRows; row++) {
       for(int column = 1; column <= _numColumns; column++) {
@@ -38,7 +39,14 @@ public class Spreadsheet implements Serializable {
     }
   }
 
-
+  /**
+   * Getter for a Cell object. Returns a Cell when given its coordinates.
+   *
+   * @param row row of Cell object
+   * @param column column of Cell object
+   * @throws InvalidCellException when specified coordinates are out of bounds of the spreadsheet
+   * @returns Cell object 
+   */
   // Returns an object cell when given its coordinates
   public Cell getCell(int row, int column) throws InvalidCellException{
     
@@ -50,17 +58,18 @@ public class Spreadsheet implements Serializable {
     }
   }
     
-
-  // Returns true if coordinates are valid, else returns false
+  /**
+   * Checks if a given Cell is within the bounds of the Spreadsheet
+   * 
+   * @param row cell's row
+   * @param column cell's column
+   * @return boolean: true if cell is valid, false otherwise
+   */
   public boolean isValidCell(int row, int column){
     return row >= 1 && row <= _numRows && column >= 1 && column <= _numColumns;
   }
   
-  // FIXME define attributes
-  // FIXME define contructor(s)
-  // FIXME define methods
   
-
   /**
    * Insert specified content in specified address.
    *
@@ -76,12 +85,16 @@ public class Spreadsheet implements Serializable {
     } catch (InvalidCellException ice){
       System.err.println("Failed to insert content. Invalid cell coordinates: " + row + ";" + column);
     }
-    //FIXME implement method
   }
 
-
-  // Na classe Spreadsheet preciso de algo com a seguinte funcionalidade
-  Range createRange(String range) throws InvalidRangeException  {
+  /**
+   * Creates a Range object from a string description of it.
+   * 
+   * @param range String that specifies the range.
+   * @return Range object.
+   * @throws InvalidCellRangeException
+   */
+  Range createRange(String range) throws InvalidCellRangeException  {
     String[] rangeCoordinates;
     int firstRow, firstColumn, lastRow, lastColumn;
     
@@ -101,11 +114,21 @@ public class Spreadsheet implements Serializable {
       return new Range(firstColumn, lastColumn, lastRow, lastColumn, this);
     
     else{
-      throw new InvalidRangeException("Specified range is invalid.");
+      throw new InvalidCellRangeException("Specified range is invalid.");
     }
   }
 
 
+  /**
+   * Checks if a given Range is valid when given its starting and ending cell coordinates
+   * (essencially it checks if the range is either horizontal or vertical)
+   * 
+   * @param beginRow r
+   * @param beginColumn 
+   * @param endRow
+   * @param endColumn
+   * @return boolean: true if range is valid, false otherwise
+   */
   // Returns true if specified Range is valid, else returns false.
   public boolean isRangeValid(int beginRow, int beginColumn, int endRow, int endColumn){
 
@@ -123,6 +146,4 @@ public class Spreadsheet implements Serializable {
     }
     return false; 
   }
-
-  
 }

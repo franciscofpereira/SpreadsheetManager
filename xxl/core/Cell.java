@@ -24,6 +24,10 @@ public class Cell implements Serializable{
     }
 
     Literal value(){
+        
+        if(_content == null)
+            return null;
+
         return _content.value();
     }
     

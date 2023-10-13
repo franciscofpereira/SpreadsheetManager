@@ -2,6 +2,7 @@ package xxl.app.edit;
 
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
+import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.Spreadsheet;
 import xxl.core.exception.InvalidCellException;
 // FIXME import classes
@@ -93,6 +94,11 @@ protected final void execute() throws CommandException {
                     }
                 }
             }
+            
+            else{
+                throw new InvalidCellRangeException(gama);
+            }
+            
         }
     } catch (UnrecognizedEntryException uee) {
         System.err.println("The specified gama is not recognizable.");

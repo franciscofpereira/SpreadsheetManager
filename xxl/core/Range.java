@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xxl.core.exception.InvalidCellException;
-import xxl.core.exception.InvalidRangeException;
+
 
 public class Range {
     private int _beginRow;
