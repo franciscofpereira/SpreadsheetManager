@@ -14,6 +14,7 @@ import xxl.core.exception.ImportFileException;
 import xxl.core.exception.MissingFileAssociationException;
 import xxl.core.exception.UnavailableFileException;
 import xxl.core.exception.UnrecognizedEntryException;
+import xxl.core.exception.UnrecognizedFunctionException;
 
 // FIXME import classes
 
@@ -112,7 +113,7 @@ public class Calculator implements Serializable {
       //       each entry is inserted using insertContent of Spreadsheet. Set new
       // spreadsheet as the active one.
        
-   } catch (IOException | UnrecognizedEntryException /* FIXME maybe other exceptions */ e) {
+   } catch (IOException | UnrecognizedEntryException | UnrecognizedFunctionException/* FIXME maybe other exceptions */ e) {
       throw new ImportFileException(filename, e);
     }
   } 

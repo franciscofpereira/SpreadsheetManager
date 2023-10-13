@@ -4,7 +4,7 @@ public class LiteralInteger extends Literal {
     
     private int _value;
     
-    public LiteralInteger(Integer value){
+    public LiteralInteger(int value){
         _value = value;                           
     }
 

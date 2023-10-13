@@ -11,5 +11,17 @@ public class Sub extends BinaryFunction {
         _arg2 = arg2;     
     }
 
-    //public Literal compute()
+    public Literal compute(){
+        
+        if (_arg1 instanceof LiteralInteger && _arg2 instanceof LiteralInteger) { 
+            // Perform the addition
+            int result = _arg1.asInt() - _arg2.asInt();
+            return new LiteralInteger(result);
+
+        } else {
+            // Handles the case where the arguments are not integers
+            //toString();
+            return null; // FIXME
+        } 
+    }
 }

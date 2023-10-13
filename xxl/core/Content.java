@@ -13,10 +13,10 @@ public abstract class Content implements Serializable {
     public abstract String toString(); 
 
     public String asString(){
-        return value().asString();
+        return value().asString();   //FIXME maybe its just ""
     }
 
-    //public int asInt(){
-        // FIXME implement method
-    //}
+    public int asInt(){
+        return value().asInt();
+    }
 }

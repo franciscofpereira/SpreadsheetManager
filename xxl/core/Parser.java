@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.ArrayList;
 
 import xxl.core.exception.UnrecognizedEntryException;
+import xxl.core.exception.UnrecognizedFunctionException;
 
 class Parser {
 
@@ -22,7 +23,8 @@ class Parser {
   }
 
   
-  Spreadsheet parseFile(String filename) throws IOException, UnrecognizedEntryException /* More Exceptions? */ {
+  Spreadsheet parseFile(String filename) throws IOException, UnrecognizedEntryException, UnrecognizedFunctionException /* More Exceptions? */ {
+    
     try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
       
       parseDimensions(reader);      // Parses the dimensions of the spreadsheet (first 2 lines of the import file)
@@ -61,7 +63,7 @@ class Parser {
   }
 
 
-  private void parseLine(String line) throws UnrecognizedEntryException /*, more exceptions? */{
+  private void parseLine(String line) throws UnrecognizedEntryException, UnrecognizedFunctionException /*, more exceptions? */{
     
     String[] components = line.split("\\|");            // Separates cell coordinates from cell content
 
@@ -69,7 +71,7 @@ class Parser {
       return;
     
     if (components.length == 2) {
-      String[] address = components[0].split(";");      // Parses cell's coordinates
+      String[] address = components[0].split(";");            // Parses cell's coordinates
       Content content = parseContent(components[1]);          // Parses cell's content
       _spreadsheet.insertContent(Integer.parseInt(address[0]), Integer.parseInt(address[1]), content);
     } else
@@ -78,7 +80,7 @@ class Parser {
 
 
   // parse the begining of an expression
-  Content parseContent(String contentSpecification) throws UnrecognizedEntryException {
+  Content parseContent(String contentSpecification) throws UnrecognizedEntryException, UnrecognizedFunctionException {
     char c = contentSpecification.charAt(0);
 
     if (c == '=')
@@ -104,7 +106,7 @@ class Parser {
   }
 
   // contentSpecification is what comes after '='
-  private Content parseContentExpression(String contentSpecification) throws UnrecognizedEntryException /*more exceptions */ {
+  private Content parseContentExpression(String contentSpecification) throws UnrecognizedEntryException, UnrecognizedFunctionException /*more exceptions */ {
     if (contentSpecification.contains("("))
       return parseFunction(contentSpecification);
     
@@ -115,25 +117,26 @@ class Parser {
     }
   }
 
-  private Content parseFunction(String functionSpecification) throws UnrecognizedEntryException /*more exceptions */ {
+  private Content parseFunction(String functionSpecification) throws UnrecognizedEntryException, UnrecognizedFunctionException /*more exceptions */ {
     String[] components = functionSpecification.split("[()]");
     if (components[1].contains(","))
       return parseBinaryFunction(components[0], components[1]);
-        
-    return parseIntervalFunction(components[0], components[1]);
+    
+    return null;
+    //return parseIntervalFunction(components[0], components[1]);
   }
 
-  private Content parseBinaryFunction(String functionName, String args) throws UnrecognizedEntryException /* , more Exceptions */ {
+  private Content parseBinaryFunction(String functionName, String args) throws UnrecognizedEntryException, UnrecognizedFunctionException /* , more Exceptions */ {
     String[] arguments = args.split(",");
     Content arg0 = parseArgumentExpression(arguments[0]);
     Content arg1 = parseArgumentExpression(arguments[1]);
     
     return switch (functionName) {
       case "ADD" -> new Add(arg0, arg1);
-      case "SUB" -> new Sub(arg0, arg1);         // FIXME implement Function class
+      case "SUB" -> new Sub(arg0, arg1);         
       case "MUL" -> new Mul(arg0, arg1);
       case "DIV" -> new Div(arg0, arg1);
-      default -> dar erro com função inválida: functionName ;
+      default -> throw new UnrecognizedFunctionException("Function: " + functionName + "does not exist.");
     };
   }
 

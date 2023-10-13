@@ -6,6 +6,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 import xxl.core.exception.InvalidCellException;
+import xxl.core.exception.InvalidRangeException;
 import xxl.core.exception.UnrecognizedEntryException;
 
 /**
@@ -17,7 +18,7 @@ public class Spreadsheet implements Serializable {
   
   private int _numRows;
   private int _numColumns;
-  private boolean _changed;
+  //private boolean _changed;
   private Cell[][] _cells;
 
   public Spreadsheet( int rows, int columns){     // Spreadsheet Constructor
@@ -51,9 +52,10 @@ public class Spreadsheet implements Serializable {
     
 
   // Returns true if coordinates are valid, else returns false
-  private boolean isValidCell(int row, int column){
+  public boolean isValidCell(int row, int column){
     return row >= 1 && row <= _numRows && column >= 1 && column <= _numColumns;
   }
+  
   // FIXME define attributes
   // FIXME define contructor(s)
   // FIXME define methods
@@ -76,4 +78,51 @@ public class Spreadsheet implements Serializable {
     }
     //FIXME implement method
   }
+
+
+  // Na classe Spreadsheet preciso de algo com a seguinte funcionalidade
+  Range createRange(String range) throws InvalidRangeException  {
+    String[] rangeCoordinates;
+    int firstRow, firstColumn, lastRow, lastColumn;
+    
+    if (range.indexOf(':') != -1) {
+      rangeCoordinates = range.split("[:;]");
+      firstRow = Integer.parseInt(rangeCoordinates[0]);
+      firstColumn = Integer.parseInt(rangeCoordinates[1]);
+      lastRow = Integer.parseInt(rangeCoordinates[2]);
+      lastColumn = Integer.parseInt(rangeCoordinates[3]);
+    } else {
+      rangeCoordinates = range.split(";");
+      firstRow = lastRow = Integer.parseInt(rangeCoordinates[0]);
+      firstColumn = lastColumn = Integer.parseInt(rangeCoordinates[1]);
+    }
+
+    if( isRangeValid(firstRow, lastColumn, lastRow, lastColumn))
+      return new Range(firstColumn, lastColumn, lastRow, lastColumn, this);
+    
+    else{
+      throw new InvalidRangeException("Specified range is invalid.");
+    }
+  }
+
+
+  // Returns true if specified Range is valid, else returns false.
+  public boolean isRangeValid(int beginRow, int beginColumn, int endRow, int endColumn){
+
+    if( isValidCell(beginRow, beginColumn) && isValidCell(endRow, endColumn) ) {
+
+      // horizontal range
+      if(beginRow == endRow && beginColumn != endColumn){
+        return true;
+      }
+
+      // vertical range
+      if(beginRow != endRow && beginColumn == endColumn){
+        return true;
+      }
+    }
+    return false; 
+  }
+
+  
 }

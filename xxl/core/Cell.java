@@ -28,7 +28,7 @@ public class Cell implements Serializable{
     }
     
     public String toString(){
-        return _row + ";" + _column + "|" + _content;
+        return _row + ";" + _column + "|" + _content.toString();
     }
 
 }
