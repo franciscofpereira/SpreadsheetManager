@@ -28,6 +28,11 @@ public class Cell implements Serializable{
     }
     
     public String toString(){
+
+        if(_content == null){
+            return _row + ";" + _column + "|";
+        }
+        
         return _row + ";" + _column + "|" + _content.toString();
     }
 
