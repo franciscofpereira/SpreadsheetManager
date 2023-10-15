@@ -4,13 +4,19 @@ public class Sub extends BinaryFunction {
     
     private Content _arg1;
     private Content _arg2;
+    private String _functionName;
 
     public Sub(Content arg1, Content arg2){
         super(arg1,arg2);
         _arg1 = arg1;
-        _arg2 = arg2;     
+        _arg2 = arg2; 
+        _functionName = "SUB";    
     }
 
+    public String getFunctionName(){
+        return _functionName;
+    }
+    
     public Literal compute(){
         
         if (_arg1 instanceof LiteralInteger && _arg2 instanceof LiteralInteger) { 

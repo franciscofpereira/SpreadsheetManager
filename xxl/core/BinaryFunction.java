@@ -20,8 +20,9 @@ public abstract class BinaryFunction extends Function {
         _arg2 = arg2;
     }
     
+    public abstract String getFunctionName();
 
     public String toString(){
-        return null;
+        return getFunctionName() + "(" + _arg1.toString() + "," + _arg2.toString() + ")";
     }
 }

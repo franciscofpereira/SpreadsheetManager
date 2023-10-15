@@ -16,6 +16,10 @@ public class LiteralInteger extends Literal {
         return _value;
     }
 
+    public Literal compute(){
+        return this;
+    }
+    
     // FIXME isto vai dar throw a uma exception
     //public String asString(){
     //}

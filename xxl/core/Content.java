@@ -10,7 +10,7 @@ public abstract class Content implements Serializable {
     
     abstract Literal value();
 
-    public abstract String toString(); 
+    public abstract String toString();
 
     public String asString(){
         return value().asString();   //FIXME maybe its just ""

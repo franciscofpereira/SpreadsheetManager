@@ -2,11 +2,11 @@ package xxl.core;
 
 public abstract class Function extends Content {
    
-    //private String _functionName;
+    //protected String _functionName;
 
-    public Function(){
-        //_functionName = functionName;
-    }
+    //public Function(String functionName){
+    //    _functionName = functionName;
+    //}
 
     protected abstract Literal compute();    // Computes the result of the function
 
@@ -14,9 +14,9 @@ public abstract class Function extends Content {
         return null;        // FIXME
     }
 
-    //public int asInt(){
-
-    //}
+    public int asInt(){
+        return compute().asInt();
+    }
 
     public Literal value(){
         return compute();        // FIXME
