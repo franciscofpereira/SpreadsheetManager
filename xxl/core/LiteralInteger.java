@@ -21,8 +21,9 @@ public class LiteralInteger extends Literal {
     }
     
     // FIXME isto vai dar throw a uma exception
-    //public String asString(){
-    //}
+    public String asString(){
+        return "" + _value;
+    }
     
     
 }

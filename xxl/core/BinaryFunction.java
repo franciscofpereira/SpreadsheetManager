@@ -23,6 +23,6 @@ public abstract class BinaryFunction extends Function {
     public abstract String getFunctionName();
 
     public String toString(){
-        return getFunctionName() + "(" + _arg1.toString() + "," + _arg2.toString() + ")";
+        return "" + compute() + "=" + getFunctionName() + "(" + _arg1.asString() + "," + _arg2.asString() + ")";
     }
 }

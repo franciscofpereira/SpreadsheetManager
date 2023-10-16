@@ -23,9 +23,12 @@ public class Reference extends Content{
             return "#VALUE=" + _row + ";" + _column ;
         }
         
-        return value() + "";
+        return value() + "=" + _row + ";" + _column;
     }
 
+    public String asString(){
+        return _row + ";" + _column;
+    }
     // Getter for Literal value stored in referenced cell
     Literal value(){
         
@@ -44,7 +47,11 @@ public class Reference extends Content{
 
         Literal value = value();
         
-        // If it's a LiteralInteger we just return it
+        if(value() == null){
+            return new LiteralString("#VALUE");
+        }
+        
+        // If it's a LiteralInteger we just return its value
         if( value instanceof LiteralInteger ){
             return value;
         }
