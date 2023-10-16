@@ -19,6 +19,11 @@ class DoNew extends Command<Calculator> {
   
   @Override
   protected final void execute() throws CommandException {
+
+    if(_receiver.isUnsaved() && Form.confirm(Message.saveBeforeExit())){
+      DoSave ds = new DoSave(_receiver);
+      ds.performCommand();
+    }
     @SuppressWarnings("unused")
     Spreadsheet spreadsheet = _receiver.createSpreadsheet(integerField("Rows"),integerField("Columns") );
   }

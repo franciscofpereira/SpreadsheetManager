@@ -19,6 +19,14 @@ public class Cell implements Serializable{
         _content = null;
     }
 
+    public int getRow(){
+        return _row;
+    }
+
+    public int getColumn(){
+        return _column;
+    }
+    
     void setContent( Content c){
         _content = c;
     }
