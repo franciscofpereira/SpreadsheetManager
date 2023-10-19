@@ -94,7 +94,7 @@ public class Calculator implements Serializable {
     try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)))) {
           
       Calculator loadedCalculator = (Calculator) ois.readObject();
-      
+        
         this._spreadsheet = loadedCalculator._spreadsheet;
         this._currentFile = loadedCalculator._currentFile;
 
