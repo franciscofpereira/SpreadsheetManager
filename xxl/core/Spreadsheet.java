@@ -144,11 +144,17 @@ public class Spreadsheet implements Serializable {
         return true;
       }
 
-      // range is a singular cell
-      if((beginRow!=0 && endColumn!=0) && (endRow == 0 && endColumn == 0)){
+      if(beginRow == endRow && beginColumn == endColumn){
         return true;
       }
+  
     }
+
+    // range is a singular cell
+    else if( isValidCell(beginRow, beginColumn) && (endRow == 0 && endColumn == 0)){
+        return true;
+      }
+    
     return false; 
   }
 }
