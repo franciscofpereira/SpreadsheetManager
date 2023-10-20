@@ -34,7 +34,6 @@ public class Mul extends BinaryFunction {
             result1 = ((LiteralInteger)_arg1).compute();
         }
         
-
         // Repeats the same process for _arg2
         if(_arg2 instanceof Reference){
             result2 = ((Reference)_arg2).compute();
@@ -43,7 +42,6 @@ public class Mul extends BinaryFunction {
         } else if(_arg2 instanceof LiteralInteger){
             result2 = ((LiteralInteger)_arg2).compute();
         }
-        
         
         if (result1 == null || result2 == null) {
             return new LiteralString("#VALUE");

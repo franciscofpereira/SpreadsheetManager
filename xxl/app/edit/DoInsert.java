@@ -34,23 +34,24 @@ class DoInsert extends Command<Spreadsheet> {
     //FIXME implement method 
     
     
-    /* 
-      try{
+     
+     //try{
         
         Range range = _receiver.createRange(stringField("range"));
-        Parser p = new Parser(_receiver);
-        Content content = p.parseContent(stringField("range"));
+        //Parser p = new Parser(_receiver);
+        //Content content = p.parseContent(stringField("range"));
+        range.insertRangeContent(stringField("content"));
         
-        List<Cell> cellList = range.getCells();
+        //List<Cell> cellList = range.getRangeCells();
       
-        for( Cell cell: cellList){
-          _receiver.insertContent(cell.getRow(), cell.getColumn(), content);
-        } 
+        //for( Cell cell: cellList){
+        //  _receiver.insertContent(cell.getRow(), cell.getColumn(), content);
+        //} 
 
-      }catch(InvalidCellRangeException| InvalidCellException| UnrecognizedEntryException | UnrecognizedFunctionException e ){
-        System.err.println("Something went wrong inserting content.");
-      }
-      */
+      //}catch(InvalidCellRangeException| InvalidCellException| UnrecognizedEntryException | UnrecognizedFunctionException e ){
+      //  System.err.println("Something went wrong inserting content.");
+      //}
+      
     }   
        
 }

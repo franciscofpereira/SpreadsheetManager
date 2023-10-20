@@ -78,7 +78,7 @@ public class Spreadsheet implements Serializable {
    * @param contentSpecification the specification in a string format of the content to put
    *        in the specified cell.
    */
-  public void insertContent(int row, int column, Content contentSpecification) throws UnrecognizedEntryException /* FIXME maybe add exceptions */ {
+  public void insertContent(int row, int column, Content contentSpecification){ //throws UnrecognizedEntryException /* FIXME maybe add exceptions */ {
     
     try{
       getCell(row, column).setContent(contentSpecification);
@@ -94,7 +94,7 @@ public class Spreadsheet implements Serializable {
    * @return Range object.
    * @throws InvalidCellRangeException
    */
-  Range createRange(String range) throws InvalidCellRangeException  {
+  public Range createRange(String range) throws InvalidCellRangeException  {
     String[] rangeCoordinates;
     int firstRow, firstColumn, lastRow, lastColumn;
     
