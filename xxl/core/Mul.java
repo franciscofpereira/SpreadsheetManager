@@ -30,6 +30,10 @@ public class Mul extends BinaryFunction {
             if(result1 instanceof LiteralString)
                 return new LiteralString("#VALUE");
         }
+        // If _arg1 is a LiteralString we can't compute the MUL function
+        else if(_arg1 instanceof LiteralString){
+            return new LiteralString("#VALUE");
+        }
         else if(_arg1 instanceof LiteralInteger){
             result1 = ((LiteralInteger)_arg1).compute();
         }
@@ -39,10 +43,14 @@ public class Mul extends BinaryFunction {
             result2 = ((Reference)_arg2).compute();
             if(result2 instanceof LiteralString)
                 return new LiteralString("#VALUE");
+        else if(_arg2 instanceof LiteralString){
+            return new LiteralString("#VALUE");
+        }
         } else if(_arg2 instanceof LiteralInteger){
             result2 = ((LiteralInteger)_arg2).compute();
         }
         
+
         if (result1 == null || result2 == null) {
             return new LiteralString("#VALUE");
         }

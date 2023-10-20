@@ -7,13 +7,13 @@ public abstract class BinaryFunction extends Function {
 
     public BinaryFunction(Content arg1, Content arg2) {
         // Check if arg1 is either a LiteralInteger or a Reference, if not throws exception.
-        if (!(arg1 instanceof LiteralInteger || arg1 instanceof Reference)) {
-            throw new IllegalArgumentException("arg1 must be a LiteralInteger or Reference.");
+        if (!(arg1 instanceof Literal || arg1 instanceof Reference)) {
+            throw new IllegalArgumentException("arg1 must be a Literal or Reference.");
         }
         
         // Check if arg2 is neither a LiteralInteger nor a Reference
-        if (!(arg2 instanceof LiteralInteger || arg2 instanceof Reference)) {
-            throw new IllegalArgumentException("arg2 must be a LiteralInteger or Reference.");
+        if (!(arg2 instanceof Literal || arg2 instanceof Reference)) {
+            throw new IllegalArgumentException("arg2 must be a Literal or Reference.");
         }
     
         _arg1 = arg1;

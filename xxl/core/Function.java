@@ -1,5 +1,8 @@
 package xxl.core;
 
+import xxl.core.exception.UnrecognizedEntryException;
+import xxl.core.exception.UnrecognizedFunctionException;
+
 public abstract class Function extends Content {
    
     //protected String _functionName;
@@ -8,7 +11,7 @@ public abstract class Function extends Content {
     //    _functionName = functionName;
     //}
 
-    protected abstract Literal compute();    // Computes the result of the function
+    protected abstract Literal compute(); // Computes the result of the function
 
     public String asString(){
         return null;        // FIXME

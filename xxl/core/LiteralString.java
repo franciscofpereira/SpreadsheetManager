@@ -13,9 +13,13 @@ public class LiteralString extends Literal {
     }
 
     public String asString(){
-        return "'" + _value;
+        return _value;
     }
     
+    public Literal compute(){
+        return this;
+    }
+
     // FIXME isto vai dar throw a uma exception
     //public Integer asInt(){
     //    return value;

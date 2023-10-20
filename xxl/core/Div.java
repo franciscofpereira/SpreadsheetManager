@@ -1,5 +1,8 @@
 package xxl.core;
 
+import xxl.core.exception.UnrecognizedEntryException;
+import xxl.core.exception.UnrecognizedFunctionException;
+
 public class Div extends BinaryFunction {
     
     private Content _arg1;
@@ -26,9 +29,13 @@ public class Div extends BinaryFunction {
         if(_arg1 instanceof Reference){
             result1 = ((Reference)_arg1).compute();
             
-            // If the computed value is a LiteralString it means the value is a String and we can't compute the ADD function.
+            // If the computed value is a LiteralString it means the value is a String and we can't compute the DIV function.
             if(result1 instanceof LiteralString)
                 return new LiteralString("#VALUE");
+        }
+        // If _arg1 is a LiteralString we can't compute the DIV function
+        else if(_arg1 instanceof LiteralString){
+            return new LiteralString("#VALUE");
         }
         else if(_arg1 instanceof LiteralInteger){
             result1 = ((LiteralInteger)_arg1).compute();
@@ -40,10 +47,12 @@ public class Div extends BinaryFunction {
             result2 = ((Reference)_arg2).compute();
             if(result2 instanceof LiteralString)
                 return new LiteralString("#VALUE");
+        else if(_arg2 instanceof LiteralString){
+            return new LiteralString("#VALUE");
+        }
         } else if(_arg2 instanceof LiteralInteger){
             result2 = ((LiteralInteger)_arg2).compute();
         }
-        
         
         if (result1 == null || result2 == null) {
             return new LiteralString("#VALUE");
