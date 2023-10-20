@@ -110,8 +110,8 @@ public class Spreadsheet implements Serializable {
       firstColumn = lastColumn = Integer.parseInt(rangeCoordinates[1]);
     }
 
-    if( isRangeValid(firstRow, lastColumn, lastRow, lastColumn))
-      return new Range(firstColumn, lastColumn, lastRow, lastColumn, this);
+    if( isRangeValid(firstRow, firstColumn, lastRow, lastColumn))
+      return new Range(firstRow, firstColumn, lastRow, lastColumn, this);
     
     else{
       throw new InvalidCellRangeException("Specified range is invalid.");
@@ -144,16 +144,12 @@ public class Spreadsheet implements Serializable {
         return true;
       }
 
+      // singular cell
       if(beginRow == endRow && beginColumn == endColumn){
         return true;
       }
   
     }
-
-    // range is a singular cell
-    else if( isValidCell(beginRow, beginColumn) && (endRow == 0 && endColumn == 0)){
-        return true;
-      }
     
     return false; 
   }

@@ -22,13 +22,15 @@ public class Range {
         _endRow = endRow;
         _endColumn = endColumn;
         _spreadsheet = spreadsheet;
+        getRangeCells();
     }
     
-    List<Cell> getRangeCells() throws InvalidCellException{
-
+    List<Cell> getRangeCells(){
+        
+        try{
             // Case of horizontal Range
             if(_beginRow == _endRow && _beginColumn != _endColumn){
-                for ( int col = _beginColumn; col < _endColumn; col++){
+                for ( int col = _beginColumn; col <= _endColumn; col++){
                     Cell cell = _spreadsheet.getCell(_beginRow,col);
                     _cellList.add(cell);   
                 }
@@ -36,7 +38,7 @@ public class Range {
             }
             // Case of vertical Range
             if(_beginRow != _endRow && _beginColumn == _endColumn){
-                for ( int row = _beginRow; row < _endRow; row++){
+                for ( int row = _beginRow; row <= _endRow; row++){
                     Cell cell = _spreadsheet.getCell(row, _beginColumn);
                     _cellList.add(cell);   
                 }
@@ -44,18 +46,19 @@ public class Range {
             }
 
             // Case of singular cell
-            if((_beginRow == _endRow && _beginRow == _endRow) || (_endRow == 0 && _endColumn == 0)){
+            if((_beginRow == _endRow && _beginRow == _endRow)){
                 Cell cell = _spreadsheet.getCell(_beginRow, _beginColumn);
                 _cellList.add(cell);
                 return _cellList;
             }
-            
-            throw new InvalidCellException("Invalid cell accessed in Range.");
-
-        }   
-
-    
+        } catch(InvalidCellException ice){
+            System.err.println("Attempt to add invalid cell to Range _cellList.");
+        }    
         
+        return null;
+    }   
+
+      
     public void insertRangeContent(String contentSpecification){
         
         Parser p = new Parser();
