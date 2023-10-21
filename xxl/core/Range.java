@@ -79,10 +79,12 @@ public class Range {
         return null;
     }   
 
+    // Getter for the _cellList field
     public List<Cell> getCellList(){
         return _cellList;
     }
 
+    // Inserts content in the given Range
     public void insertRangeContent(String contentSpecification){
         
         Parser p = new Parser(_spreadsheet);
