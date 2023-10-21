@@ -5,4 +5,4 @@ Menu Principal
 0 - Sair
 Escolha uma opção: Número inválido!
 Escolha uma opção: Número inválido!
-Escolha uma opção: 
+Escolha uma opção: Fim de entrada de dados (R-EOF): pt.tecnico.uilib.text.RuntimeEOFException: Fim do fluxo de dados de entrada

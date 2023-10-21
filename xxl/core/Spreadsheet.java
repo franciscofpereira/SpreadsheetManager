@@ -5,7 +5,6 @@ package xxl.core;
 import java.io.Serial;
 import java.io.Serializable;
 
-import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.exception.InvalidCellException;
 import xxl.core.exception.UnrecognizedEntryException;
 
@@ -94,7 +93,7 @@ public class Spreadsheet implements Serializable {
    * @return Range object.
    * @throws InvalidCellRangeException
    */
-  public Range createRange(String range) throws InvalidCellRangeException  {
+  public Range createRange(String range) throws UnrecognizedEntryException{
     String[] rangeCoordinates;
     int firstRow, firstColumn, lastRow, lastColumn;
     
@@ -112,9 +111,9 @@ public class Spreadsheet implements Serializable {
 
     if( isRangeValid(firstRow, firstColumn, lastRow, lastColumn))
       return new Range(firstRow, firstColumn, lastRow, lastColumn, this);
-    
+
     else{
-      throw new InvalidCellRangeException("Specified range is invalid.");
+      throw new UnrecognizedEntryException("Specified range cannot be created.");
     }
   }
 
