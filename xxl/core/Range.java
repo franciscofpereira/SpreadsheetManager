@@ -22,25 +22,46 @@ public class Range {
         _endRow = endRow;
         _endColumn = endColumn;
         _spreadsheet = spreadsheet;
-        getRangeCells();
+        initializeRangeCellList();
     }
     
-    List<Cell> getRangeCells(){
+    List<Cell> initializeRangeCellList(){
         
         try{
             // Case of horizontal Range
             if(_beginRow == _endRow && _beginColumn != _endColumn){
-                for ( int col = _beginColumn; col <= _endColumn; col++){
-                    Cell cell = _spreadsheet.getCell(_beginRow,col);
-                    _cellList.add(cell);   
+                // Ascending order
+                if(_beginColumn < _endColumn){
+                    for ( int col = _beginColumn; col <= _endColumn; col++){
+                        Cell cell = _spreadsheet.getCell(_beginRow,col);
+                        _cellList.add(cell);   
+                    }
                 }
+                // Descending order
+                else{
+                    for( int col = _beginColumn; col>=_endColumn; col--){
+                        Cell cell = _spreadsheet.getCell(_beginRow,col);
+                        _cellList.add(cell); 
+                    }
+                } 
                 return _cellList;
-            }
+                }
+                
             // Case of vertical Range
             if(_beginRow != _endRow && _beginColumn == _endColumn){
-                for ( int row = _beginRow; row <= _endRow; row++){
-                    Cell cell = _spreadsheet.getCell(row, _beginColumn);
-                    _cellList.add(cell);   
+                // Ascending order
+                if(_beginRow < _endRow){
+                    for ( int row = _beginRow; row <= _endRow; row++){
+                        Cell cell = _spreadsheet.getCell(row, _beginColumn);
+                        _cellList.add(cell);   
+                    }
+                }
+                // Descending order
+                else{
+                    for( int row = _beginRow; row >= _endRow; row--){
+                        Cell cell = _spreadsheet.getCell(row, _beginColumn);
+                        _cellList.add(cell);
+                    }
                 }
                 return _cellList;
             }
@@ -58,7 +79,10 @@ public class Range {
         return null;
     }   
 
-      
+    public List<Cell> getCellList(){
+        return _cellList;
+    }
+
     public void insertRangeContent(String contentSpecification){
         
         Parser p = new Parser(_spreadsheet);
@@ -74,4 +98,5 @@ public class Range {
             System.err.println("The specified content is not valid.");
         }
     }
+
 }
