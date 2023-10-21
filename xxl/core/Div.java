@@ -5,11 +5,10 @@ import xxl.core.exception.UnrecognizedFunctionException;
 
 public class Div extends BinaryFunction {
     
-    private String _functionName;
+    private static final String _functionName = "DIV";
 
     public Div(Content arg1, Content arg2){
-        super(arg1,arg2);
-        _functionName = "DIV";   
+        super(arg1,arg2); 
     }
 
     public String getFunctionName(){

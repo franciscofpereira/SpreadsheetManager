@@ -2,11 +2,10 @@ package xxl.core;
 
 public class Sub extends BinaryFunction {
 
-    private String _functionName;
+    private static final String _functionName = "SUB";
 
     public Sub(Content arg1, Content arg2){
         super(arg1,arg2);
-        _functionName = "SUB";    
     }
 
     public String getFunctionName(){

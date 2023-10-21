@@ -3,11 +3,10 @@ package xxl.core;
 
 public class Add extends BinaryFunction {
     
-    private String _functionName;
+    private static final String _functionName = "ADD";
 
     public Add(Content arg1, Content arg2){
         super(arg1,arg2);     
-        _functionName = "ADD";
     }
  
     public String getFunctionName(){

@@ -2,11 +2,10 @@ package xxl.core;
 
 public class Mul extends BinaryFunction {
     
-    private String _functionName;
+    private static final String _functionName = "MUL";
 
     public Mul(Content arg1, Content arg2){
-        super(arg1,arg2);
-        _functionName = "MUL";    
+        super(arg1,arg2);    
     }
 
     public String getFunctionName(){
