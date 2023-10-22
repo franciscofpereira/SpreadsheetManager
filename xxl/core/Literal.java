@@ -7,5 +7,7 @@ public abstract class Literal extends Content {
         return this;
     }
 
+    public abstract Literal compute();
+
     }
 

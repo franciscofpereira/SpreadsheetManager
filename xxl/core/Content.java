@@ -2,6 +2,7 @@ package xxl.core;
 
 import java.io.Serial;
 import java.io.Serializable;
+import xxl.core.exception.UnsupportedConversionException;
 
 
 public abstract class Content implements Serializable {
@@ -17,7 +18,7 @@ public abstract class Content implements Serializable {
         return value().asString();   //FIXME maybe its just ""
     }
 
-    public int asInt(){
+    public int asInt() throws UnsupportedConversionException{
         return value().asInt();
     }
 }

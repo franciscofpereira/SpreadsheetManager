@@ -1,5 +1,7 @@
 package xxl.core;
 
+import xxl.core.exception.UnsupportedConversionException;
+
 public class LiteralString extends Literal {
     
     private String _value;
@@ -21,11 +23,8 @@ public class LiteralString extends Literal {
     }
 
     // FIXME isto vai dar throw a uma exception
-    //public Integer asInt(){
-    //    return value;
-    //}
-
-    
-
+    public int asInt() throws UnsupportedConversionException{
+        throw new UnsupportedConversionException("Cannot convert a LiteralString to an integer");
+    }
    
 }

@@ -2,6 +2,7 @@ package xxl.core;
 
 import xxl.core.exception.UnrecognizedEntryException;
 import xxl.core.exception.UnrecognizedFunctionException;
+import xxl.core.exception.UnsupportedConversionException;
 
 public abstract class Function extends Content {
    
@@ -17,7 +18,7 @@ public abstract class Function extends Content {
         return null;        // FIXME
     }
 
-    public int asInt(){
+    public int asInt() throws UnsupportedConversionException{
         return compute().asInt();
     }
 
