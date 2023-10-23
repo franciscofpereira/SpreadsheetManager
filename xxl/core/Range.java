@@ -15,14 +15,20 @@ public class Range {
     private int _endColumn;
     private List<Cell> _cellList = new ArrayList<>();
     private Spreadsheet _spreadsheet;
+    private String _rangeDescriptioString;
 
-    public Range(int beginRow, int beginColumn, int endRow, int endColumn, Spreadsheet spreadsheet){
+    public Range(int beginRow, int beginColumn, int endRow, int endColumn, String range, Spreadsheet spreadsheet){
         _beginRow = beginRow;
         _beginColumn = beginColumn;
         _endRow = endRow;
         _endColumn = endColumn;
+        _rangeDescriptioString = range;
         _spreadsheet = spreadsheet;
         initializeRangeCellList();
+    }
+    
+    public String asArg(){
+        return _rangeDescriptioString;
     }
     
     List<Cell> initializeRangeCellList(){

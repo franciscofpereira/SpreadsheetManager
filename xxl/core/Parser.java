@@ -120,8 +120,8 @@ class Parser {
     if (components[1].contains(","))
       return parseBinaryFunction(components[0], components[1]);
     
-    return null;
-    //return parseIntervalFunction(components[0], components[1]);
+    //return null;
+    return parseIntervalFunction(components[0], components[1]);
   }
 
   private Content parseBinaryFunction(String functionName, String args) throws UnrecognizedEntryException, UnrecognizedFunctionException /* , more Exceptions */ {
@@ -148,19 +148,23 @@ class Parser {
   }
 
   
-  /* 
+   
   private Content parseIntervalFunction(String functionName, String rangeDescription)
-    throws UnrecognizedEntryException // , more exceptions ?  {
-    Range range = _spreadsheet.buildRange(rangeDescription);
-    return switch (functionName) {
-      case "CONCAT" -> new Concat com range 
-      case "COASLECE" -> new Coaslece com range;
-      case "PRODUCT" -> new Product com range;
-      case "AVERAGE" -> new Average com range;
-      default -> dar erro com função inválida: functionName;
-    };
+    throws UnrecognizedEntryException, UnrecognizedFunctionException { // , more exceptions ?  {
+    
+      Range range = _spreadsheet.createRange(rangeDescription);
+      
+      return switch (functionName) {
+      case "CONCAT" -> new Concat(range); 
+      case "COASLECE" -> new Coalesce(range);
+      case "PRODUCT" -> new Product(range);
+      case "AVERAGE" -> new Average(range);
+      default -> throw new UnrecognizedFunctionException("Function: " + functionName + "does not exist.");
+      }; 
+    
   }
-*/
+
+
 
 
   /* Na classe Spreadsheet preciso de algo com a seguinte funcionalidade

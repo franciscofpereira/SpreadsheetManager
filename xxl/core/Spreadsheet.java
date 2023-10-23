@@ -110,7 +110,7 @@ public class Spreadsheet implements Serializable {
     }
 
     if( isRangeValid(firstRow, firstColumn, lastRow, lastColumn))
-      return new Range(firstRow, firstColumn, lastRow, lastColumn, this);
+      return new Range(firstRow, firstColumn, lastRow, lastColumn, range, this);
 
     else{
       throw new UnrecognizedEntryException("Specified range cannot be created.");
