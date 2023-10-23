@@ -5,7 +5,11 @@ public abstract class BinaryFunction extends Function {
     protected Content _arg1;
     protected Content _arg2;
 
-    public BinaryFunction(Content arg1, Content arg2) {
+    public BinaryFunction(Content arg1, Content arg2, String functionName){
+        
+        // Creates Function object with given name
+        super(functionName);
+        
         // Check if arg1 is either a LiteralInteger or a Reference, if not throws exception.
         if (!(arg1 instanceof Literal || arg1 instanceof Reference)) {
             throw new IllegalArgumentException("arg1 must be a Literal or Reference.");
@@ -18,11 +22,11 @@ public abstract class BinaryFunction extends Function {
     
         _arg1 = arg1;
         _arg2 = arg2;
+        
     }
     
-    public abstract String getFunctionName();
-
+    @Override
     public String toString(){
-        return "" + compute() + "=" + getFunctionName() + "(" + _arg1.asString() + "," + _arg2.asString() + ")";
+        return "" + compute() + "=" + super._functionName + "(" + _arg1.asArg() + "," + _arg2.asArg() + ")";
     }
 }

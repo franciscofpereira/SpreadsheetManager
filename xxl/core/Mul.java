@@ -3,17 +3,12 @@ package xxl.core;
 import xxl.core.exception.UnsupportedConversionException;
 
 public class Mul extends BinaryFunction {
-    
-    private static final String _functionName = "MUL";
 
     public Mul(Content arg1, Content arg2){
-        super(arg1,arg2);    
-    }
-
-    public String getFunctionName(){
-        return _functionName;
+        super(arg1,arg2,"MUL");    
     }
     
+    @Override
     protected Literal compute(){
         
         try{

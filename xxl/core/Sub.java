@@ -2,18 +2,13 @@ package xxl.core;
 
 import xxl.core.exception.UnsupportedConversionException;
 
-public class Sub extends BinaryFunction {
-
-    private static final String _functionName = "SUB";
+public class Sub extends BinaryFunction{
 
     public Sub(Content arg1, Content arg2){
-        super(arg1,arg2);
+        super(arg1,arg2,"SUB");
     }
 
-    public String getFunctionName(){
-        return _functionName;
-    }
-    
+    @Override
     protected Literal compute(){
         
         try{

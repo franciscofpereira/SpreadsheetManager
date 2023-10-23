@@ -4,16 +4,12 @@ import xxl.core.exception.UnsupportedConversionException;
 
 public class Add extends BinaryFunction {
     
-    private static final String _functionName = "ADD";
-
     public Add(Content arg1, Content arg2){
-        super(arg1,arg2);     
+        super(arg1,arg2,"ADD");     
     }
  
-    public String getFunctionName(){
-        return _functionName;
-    }
 
+    @Override
     protected Literal compute(){
         
         try{

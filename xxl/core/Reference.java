@@ -1,8 +1,6 @@
 package xxl.core;
 
 import xxl.core.exception.InvalidCellException;
-import xxl.core.exception.UnrecognizedEntryException;
-import xxl.core.exception.UnrecognizedFunctionException;
 
 public class Reference extends Content{
     
@@ -21,7 +19,7 @@ public class Reference extends Content{
         return compute() + "=" + _row + ";" + _column;
     }
 
-    public String asString(){
+    public String asArg(){
         return _row + ";" + _column;
     }
     // Getter for Literal value stored in referenced cell

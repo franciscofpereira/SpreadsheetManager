@@ -14,11 +14,15 @@ public abstract class Content implements Serializable {
 
     public abstract String toString();
 
-    public String asString(){
+    public String asString() throws UnsupportedConversionException{
         return value().asString();   //FIXME maybe its just ""
     }
-
+    
     public int asInt() throws UnsupportedConversionException{
         return value().asInt();
+    }
+
+    public String asArg() {
+        return null;
     }
 }

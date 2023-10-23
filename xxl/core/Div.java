@@ -2,18 +2,13 @@ package xxl.core;
 
 import xxl.core.exception.UnsupportedConversionException;
 
-public class Div extends BinaryFunction {
+public class Div extends BinaryFunction{
     
-    private static final String _functionName = "DIV";
-
     public Div(Content arg1, Content arg2){
-        super(arg1,arg2); 
+        super(arg1,arg2,"DIV"); 
     }
-
-    public String getFunctionName(){
-        return _functionName;
-    }
-    
+  
+    @Override
     protected Literal compute(){
         
         try{

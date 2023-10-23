@@ -10,11 +10,18 @@ public class LiteralString extends Literal {
         _value = value;
     }
 
+    @Override
     public String toString(){
         return _value;
     }
 
+    @Override
     public String asString(){
+        return _value.substring(1);
+    }
+
+    @Override
+    public String asArg(){
         return _value;
     }
     
