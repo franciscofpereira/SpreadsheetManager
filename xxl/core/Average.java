@@ -1,5 +1,7 @@
 package xxl.core;
 
+import xxl.core.exception.UnsupportedConversionException;
+
 public class Average extends RangeFunction {
     
     public Average(Range range){
@@ -8,9 +10,20 @@ public class Average extends RangeFunction {
 
     @Override
     protected Literal compute() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'compute'");
-        return null;
+        int sum = 0;
+        int count = 0;
+        
+        try{
+            for(Cell cell: _range.getCellList()){
+                sum += cell.value().asInt();
+                count++;
+            }
+
+            int average = sum/count;
+
+            return new LiteralInteger(average);
+        } catch(UnsupportedConversionException| NullPointerException e){
+            return new LiteralString("#VALUE");
+        }
     }
-  
 }

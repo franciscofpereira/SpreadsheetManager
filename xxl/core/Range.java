@@ -93,7 +93,7 @@ public class Range {
     // Inserts content in the given Range
     public void insertRangeContent(String contentSpecification){
         
-        Parser p = new Parser(_spreadsheet);
+         Parser p = new Parser(_spreadsheet);
         
         try{
 

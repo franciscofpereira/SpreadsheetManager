@@ -1,6 +1,7 @@
 package xxl.core;
 
 import xxl.core.exception.InvalidCellException;
+import xxl.core.exception.UnsupportedConversionException;
 
 public class Reference extends Content{
     

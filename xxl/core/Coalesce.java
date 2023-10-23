@@ -1,5 +1,6 @@
 package xxl.core;
 
+
 public class Coalesce extends RangeFunction {
     
     public Coalesce(Range range){
@@ -8,8 +9,21 @@ public class Coalesce extends RangeFunction {
 
     @Override
     protected Literal compute() {
-        // TODO Auto-generated method stub
-        //throw new UnsupportedOperationException("Unimplemented method 'compute'");
-        return null;
+       
+        for (Cell cell : _range.getCellList()) {
+            try {;
+
+                // Check if the cell content is a LiteralString
+                if (cell.value().toString().charAt(0) == '\'') {
+                    return cell.value();
+                }
+            } catch (NullPointerException e) {
+                // Ignore and continue
+            }
+        }
+
+        return new LiteralString("'");  
     }
+        
 }
+

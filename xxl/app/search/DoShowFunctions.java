@@ -11,6 +11,7 @@ class DoShowFunctions extends Command<Spreadsheet> {
 
   DoShowFunctions(Spreadsheet receiver) {
     super(Label.SEARCH_FUNCTIONS, receiver);
+    addStringField("Function", Message.searchFunction());
     // FIXME add fields
   }
 

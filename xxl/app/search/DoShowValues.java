@@ -11,6 +11,7 @@ class DoShowValues extends Command<Spreadsheet> {
 
   DoShowValues(Spreadsheet receiver) {
     super(Label.SEARCH_VALUES, receiver);
+    addStringField("Value", Message.searchValue());
     // FIXME add fields
   }
   
