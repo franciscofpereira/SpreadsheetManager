@@ -17,25 +17,21 @@ public class Spreadsheet implements Serializable {
   
   private int _numRows;
   private int _numColumns;
+  private CellStorageStrategy storageStrategy;
   //private boolean _changed;
-  private Cell[][] _cells;
   //private User _user;
 
   public Spreadsheet( int rows, int columns){     // Spreadsheet Constructor
     _numRows = rows;
     _numColumns = columns;
-    //_changed = false;                             // Initializes 'changed' state to false
-    _cells = new Cell[rows][columns];             // Initializes cells array
-    createCells();                                // Invokes the method that creates the Spreadsheet's Cell objects
+    storageStrategy = new TwoDimensionArrayStrategy(rows, columns); // specifies the storage strategy for the cells
+    //_changed = false;                                             // Initializes 'changed' state to false
+    createCells();                                                  // Invokes the method that creates the Spreadsheet's Cell objects
   }
 
   // Creates the spreadsheet's cells objects
   public void createCells(){                      
-    for(int row = 1; row <= _numRows; row++) {
-      for(int column = 1; column <= _numColumns; column++) {
-        _cells[row - 1][column - 1] = new Cell(row, column);    
-      }
-    }
+    storageStrategy.createCells(_numRows, _numColumns);
   }
 
   /**
@@ -50,7 +46,7 @@ public class Spreadsheet implements Serializable {
   public Cell getCell(int row, int column) throws InvalidCellException{
     
     if (isValidCell(row, column)){
-      return _cells[row - 1][column - 1];   // Returns the cell when valid coordinates are provided
+      return storageStrategy.getCell(row, column);   // Returns the cell when valid coordinates are provided
     }
     else{
       throw new InvalidCellException("Invalid cell coordinates: (" + row + "," + column +").");   
