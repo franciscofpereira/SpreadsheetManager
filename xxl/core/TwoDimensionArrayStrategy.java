@@ -41,42 +41,22 @@ public class TwoDimensionArrayStrategy implements CellStorageStrategy, Serializa
         return _cells[row - 1][column - 1];   
     }
 
-    // Stores all of the cells that contain the value we are looking for in a List
+    // Stores all of the cells that meet the search criteria in a list.
     @Override
-    public Collection<Cell> lookUpValue(String valueToFind) {
-        
+    public Collection<Cell> lookUp(SearchCriteria criteria) {
         List<Cell> foundCells = new ArrayList<>();
 
-        for( int row = 1; row <= _numRows; row++){
-            for( int column = 1; column <= _numColumns; column++){
-                
-                Literal cellValue = _cells[row-1][column-1].value();
-                
-                if( cellValue != null && cellValue.toString().equals(valueToFind) ){
-                    foundCells.add(_cells[row-1][column-1]);
+        for (int row = 1; row <= _numRows; row++) {
+            for (int column = 1; column <= _numColumns; column++) {
+                Cell cell = _cells[row - 1][column - 1];
+    
+                if (criteria.matches(cell)) {
+                    foundCells.add(cell);
                 }
             }
         }
         return foundCells;
-    }
-
-    @Override
-    public Collection<Cell> lookUpFunction(String functionToFind){
-
-        List<Cell> foundCells = new ArrayList<>();
-
-        for( int row = 1; row <= _numRows; row++){
-            for( int column = 1; column <= _numColumns; column++){
-                
-                Content cellContent = _cells[row-1][column-1].getContent();
-                
-                if( cellContent != null && cellContent.toString().contains(functionToFind)){
-                    foundCells.add(_cells[row-1][column-1]);
-                }
-            }
-        }
-        return foundCells;
-        
-    }
-
+    }    
 }
+
+

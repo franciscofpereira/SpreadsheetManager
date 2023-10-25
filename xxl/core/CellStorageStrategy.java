@@ -12,6 +12,5 @@ public interface CellStorageStrategy {
 
     void createCells(int numRows, int numColumns);
     public Cell getCell(int row, int column) throws InvalidCellException;
-    public Collection<Cell> lookUpValue(String value);
-    public Collection<Cell> lookUpFunction(String function);
+    public Collection<Cell> lookUp(SearchCriteria criteria);
 }

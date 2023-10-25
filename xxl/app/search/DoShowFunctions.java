@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import pt.tecnico.uilib.menus.Command;
 import xxl.core.Cell;
+import xxl.core.FunctionSearchCriteria;
+import xxl.core.SearchCriteria;
 import xxl.core.Spreadsheet;
 // FIXME import classes
 
@@ -21,7 +23,8 @@ class DoShowFunctions extends Command<Spreadsheet> {
   @Override
   protected final void execute() {
     
-    Collection<Cell> foundCells = _receiver.getStorageStrategy().lookUpFunction(stringField("Function"));
+    SearchCriteria criteria = new FunctionSearchCriteria(stringField("Function"));
+    Collection<Cell> foundCells = _receiver.getStorageStrategy().lookUp(criteria);
     for(Cell c: foundCells){
       _display.popup(c);
     };

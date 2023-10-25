@@ -5,8 +5,10 @@ import java.util.Collection;
 
 import pt.tecnico.uilib.menus.Command;
 import xxl.core.Cell;
+import xxl.core.SearchCriteria;
 import xxl.core.Spreadsheet;
 // FIXME import classes
+import xxl.core.ValueSearchCriteria;
 
 /**
  * Command for searching content values.
@@ -22,8 +24,8 @@ class DoShowValues extends Command<Spreadsheet> {
   @Override
   protected final void execute() {
     // FIXME implement command
-
-    Collection<Cell> foundCells = _receiver.getStorageStrategy().lookUpValue(stringField("Value"));
+    SearchCriteria criteria = new ValueSearchCriteria(stringField("Value"));
+    Collection<Cell> foundCells = _receiver.getStorageStrategy().lookUp(criteria);
     for(Cell c: foundCells){
       _display.popup(c);
     };
