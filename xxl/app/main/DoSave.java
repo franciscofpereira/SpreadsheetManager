@@ -21,10 +21,10 @@ class DoSave extends Command<Calculator> {
   protected final void execute() {
     
     // If the receiver is already saved, no need to save it again.
-    if(!_receiver.isUnsaved())
+    if(!_receiver.getSpreadsheet().isUnsaved())
       return;
     
-    _receiver.saved();    // updates receiver's _unsaved field to false
+    _receiver.getSpreadsheet().saved();    // updates receiver's _unsaved field to false
 
     try{
         try{
@@ -41,11 +41,11 @@ class DoSave extends Command<Calculator> {
               
               // The file we attempted to save to is either missing or does not exist
               // saving operation failed so we keep receiver's _unsaved field as true
-              _receiver.saveHasFailed();  
+              _receiver.getSpreadsheet().saveHasFailed();  
             }
         }
     } catch (IOException ioe){
-      _receiver.saveHasFailed();
+      _receiver.getSpreadsheet().saveHasFailed();
     }  
     // FIXME implement command and create a local Form
   }

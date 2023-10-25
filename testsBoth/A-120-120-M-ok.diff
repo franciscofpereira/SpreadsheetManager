@@ -1,0 +1,144 @@
+*** testsBoth/A-120-120-M-ok.out	2023-10-19 17:31:48.165728000 +0100
+--- testsBoth/A-120-120-M-ok.outhyp	2023-10-25 03:27:56.610144208 +0100
+***************
+*** 15,74 ****
+  5 - Menu de Consultas
+  0 - Sair
+  Escolha uma opção: 1
+! Especifique o número de linhas da folha: 12
+! Especifique o número de colunas da folha: 12
+! Menu Principal
+! 1 - Novo
+! 2 - Abrir
+! 3 - Guardar
+! 4 - Menu de Edição
+! 5 - Menu de Consultas
+! 0 - Sair
+! Escolha uma opção: 4
+! Menu de Edição
+! 1 - Visualizar
+! 2 - Inserir
+! 3 - Copiar
+! 4 - Apagar
+! 5 - Cortar
+! 6 - Colar
+! 7 - Mostrar 'cut buffer'
+! 0 - Sair
+! Escolha uma opção: 2
+! Especifique a gama (startline;startcol:endline;endcol): 2;3
+! Insira o conteúdo da célula: 5
+! Menu de Edição
+! 1 - Visualizar
+! 2 - Inserir
+! 3 - Copiar
+! 4 - Apagar
+! 5 - Cortar
+! 6 - Colar
+! 7 - Mostrar 'cut buffer'
+! 0 - Sair
+! Escolha uma opção: 1
+! Especifique a gama (startline;startcol:endline;endcol): 2;3
+! 2;3|5
+! Menu de Edição
+! 1 - Visualizar
+! 2 - Inserir
+! 3 - Copiar
+! 4 - Apagar
+! 5 - Cortar
+! 6 - Colar
+! 7 - Mostrar 'cut buffer'
+! 0 - Sair
+! Escolha uma opção: 0
+! Menu Principal
+! 1 - Novo
+! 2 - Abrir
+! 3 - Guardar
+! 4 - Menu de Edição
+! 5 - Menu de Consultas
+! 0 - Sair
+! Escolha uma opção: 2
+  Guardar antes de fechar? n
+! Ficheiro a abrir: saved30
+  Menu Principal
+  1 - Novo
+  2 - Abrir
+--- 15,34 ----
+  5 - Menu de Consultas
+  0 - Sair
+  Escolha uma opção: 1
+! Guardar antes de fechar? 12
+! Guardar antes de fechar? 12
+! Guardar antes de fechar? 4
+! Guardar antes de fechar? 2
+! Guardar antes de fechar? 2;3
+! Guardar antes de fechar? 5
+! Guardar antes de fechar? 1
+! Guardar antes de fechar? 2;3
+! Guardar antes de fechar? 0
+! Guardar antes de fechar? 2
+  Guardar antes de fechar? n
+! Especifique o número de linhas da folha: saved30
+! Especifique o número de linhas da folha: 4
+! Especifique o número de colunas da folha: 1
+  Menu Principal
+  1 - Novo
+  2 - Abrir
+***************
+*** 76,121 ****
+  4 - Menu de Edição
+  5 - Menu de Consultas
+  0 - Sair
+! Escolha uma opção: 4
+! Menu de Edição
+! 1 - Visualizar
+! 2 - Inserir
+! 3 - Copiar
+! 4 - Apagar
+! 5 - Cortar
+! 6 - Colar
+! 7 - Mostrar 'cut buffer'
+! 0 - Sair
+  Escolha uma opção: 1
+! Especifique a gama (startline;startcol:endline;endcol): 2;3
+! 2;3|'789=COALESCE(1;1:1;3)
+! Menu de Edição
+! 1 - Visualizar
+! 2 - Inserir
+! 3 - Copiar
+! 4 - Apagar
+! 5 - Cortar
+! 6 - Colar
+! 7 - Mostrar 'cut buffer'
+! 0 - Sair
+! Escolha uma opção: 1
+! Especifique a gama (startline;startcol:endline;endcol): 2;4
+! 2;4|1075=PRODUCT(2;1:2;2)
+! Menu de Edição
+! 1 - Visualizar
+! 2 - Inserir
+! 3 - Copiar
+! 4 - Apagar
+! 5 - Cortar
+! 6 - Colar
+! 7 - Mostrar 'cut buffer'
+! 0 - Sair
+! Escolha uma opção: 0
+! Menu Principal
+! 1 - Novo
+! 2 - Abrir
+! 3 - Guardar
+! 4 - Menu de Edição
+! 5 - Menu de Consultas
+! 0 - Sair
+! Escolha uma opção: 0
+--- 36,45 ----
+  4 - Menu de Edição
+  5 - Menu de Consultas
+  0 - Sair
+! Escolha uma opção: 2;3
+! Número inválido!
+  Escolha uma opção: 1
+! Guardar antes de fechar? 2;4
+! Guardar antes de fechar? 0
+! Guardar antes de fechar? 0
+! Guardar antes de fechar? Fim de entrada de dados (R-EOF): pt.tecnico.uilib.text.RuntimeEOFException: Fim do fluxo de dados de entrada

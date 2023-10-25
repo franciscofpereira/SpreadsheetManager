@@ -91,20 +91,14 @@ public class Range {
     }
 
     // Inserts content in the given Range
-    public void insertRangeContent(String contentSpecification){
+    public void insertRangeContent(String contentSpecification) throws UnrecognizedEntryException,UnrecognizedFunctionException{
         
-         Parser p = new Parser(_spreadsheet);
+        Parser p = new Parser(_spreadsheet);
         
-        try{
+        Content content = p.parseContent(contentSpecification);
 
-            Content content = p.parseContent(contentSpecification);
-
-            for(Cell cell: _cellList){
-                _spreadsheet.insertContent(cell.getRow(), cell.getColumn(), content);
-            }
-        } catch (UnrecognizedEntryException | UnrecognizedFunctionException e) {
-            System.err.println("The specified content is not valid.");
-        }
+        for(Cell cell: _cellList){
+            _spreadsheet.insertContent(cell.getRow(), cell.getColumn(), content);
+        }  
     }
-
 }

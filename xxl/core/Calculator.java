@@ -3,6 +3,7 @@ package xxl.core;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,10 @@ import xxl.core.exception.UnrecognizedFunctionException;
 
 public class Calculator implements Serializable {
   
+
+  @Serial
+  private static final long serialVersionUID = 272308012355L;
+
   // The current spreadsheet
   private Spreadsheet _spreadsheet;
   
@@ -36,10 +41,7 @@ public class Calculator implements Serializable {
   private User _activeUser;
   private List<User> _users = new ArrayList<>();
   
-  // Unsaved state variable
-  private boolean _unsaved = true;
   
-
   /**
    * Returns the current spreadsheet.
    * @returns the current spreadsheet of this application. This reference can be null.
@@ -143,25 +145,6 @@ public class Calculator implements Serializable {
     }
 
   
-  // State variable. Registers that something was changed
-    public void changed(){
-    _unsaved = true;
-  }
-
-  // State variable. Registers that everything was saved
-    public void saved() {
-      _unsaved = false;
-  }
-  
-  // Getter for _unsaved state variable
-  public boolean isUnsaved(){
-    return _unsaved;
-  }
-
-  // If an error occurrs while saving, object remains unsaved
-  public void saveHasFailed(){
-    _unsaved = true;
-  }
 }
 
 

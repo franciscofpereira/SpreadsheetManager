@@ -27,6 +27,10 @@ public class Cell implements Serializable{
         return _column;
     }
     
+    public Content getContent(){
+        return _content;
+    }
+    
     void setContent( Content c){
         _content = c;
     }

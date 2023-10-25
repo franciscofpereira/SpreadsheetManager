@@ -1,6 +1,10 @@
 package xxl.app.search;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import pt.tecnico.uilib.menus.Command;
+import xxl.core.Cell;
 import xxl.core.Spreadsheet;
 // FIXME import classes
 
@@ -18,5 +22,10 @@ class DoShowValues extends Command<Spreadsheet> {
   @Override
   protected final void execute() {
     // FIXME implement command
+
+    Collection<Cell> foundCells = _receiver.getStorageStrategy().lookUpValue(stringField("Value"));
+    for(Cell c: foundCells){
+      _display.popup(c);
+    };
   }
 }

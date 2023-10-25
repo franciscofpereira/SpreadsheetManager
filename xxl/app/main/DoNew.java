@@ -18,13 +18,17 @@ class DoNew extends Command<Calculator> {
   }
   
   @Override
-  protected final void execute() throws CommandException {
+  protected final void execute() throws CommandException{
 
-    if(_receiver.isUnsaved() && Form.confirm(Message.saveBeforeExit())){
+    Spreadsheet spreadsheet = _receiver.getSpreadsheet();
+    
+    // When opening a file, we should ask the user if he wants to save the changes made to the active Spreadsheet
+    if(spreadsheet != null && spreadsheet.isUnsaved() && Form.confirm(Message.saveBeforeExit())){
       DoSave ds = new DoSave(_receiver);
       ds.performCommand();
     }
+    
     @SuppressWarnings("unused")
-    Spreadsheet spreadsheet = _receiver.createSpreadsheet(integerField("Rows"),integerField("Columns") );
+    Spreadsheet createsSpreadsheet = _receiver.createSpreadsheet(integerField("Rows"),integerField("Columns") );
   }
 }

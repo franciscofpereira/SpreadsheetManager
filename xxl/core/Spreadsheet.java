@@ -5,6 +5,7 @@ package xxl.core;
 import java.io.Serial;
 import java.io.Serializable;
 
+import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.exception.InvalidCellException;
 import xxl.core.exception.UnrecognizedEntryException;
 
@@ -17,23 +18,28 @@ public class Spreadsheet implements Serializable {
   
   private int _numRows;
   private int _numColumns;
-  private CellStorageStrategy storageStrategy;
-  //private boolean _changed;
+  private CellStorageStrategy _storageStrategy;
+  private boolean _changed;
+  private boolean _unsaved;
   //private User _user;
 
   public Spreadsheet( int rows, int columns){     // Spreadsheet Constructor
     _numRows = rows;
     _numColumns = columns;
-    storageStrategy = new TwoDimensionArrayStrategy(rows, columns); // specifies the storage strategy for the cells
-    //_changed = false;                                             // Initializes 'changed' state to false
+    _storageStrategy = new TwoDimensionArrayStrategy(rows, columns); // specifies the storage strategy for the cells
+    _changed = false;
+    _unsaved = true;                                                // Initializes 'changed' state to false
     createCells();                                                  // Invokes the method that creates the Spreadsheet's Cell objects
   }
 
   // Creates the spreadsheet's cells objects
   public void createCells(){                      
-    storageStrategy.createCells(_numRows, _numColumns);
+    _storageStrategy.createCells(_numRows, _numColumns);
   }
 
+  public CellStorageStrategy getStorageStrategy(){
+    return _storageStrategy;
+  }
   /**
    * Getter for a Cell object. Returns a Cell when given its coordinates.
    *
@@ -46,7 +52,7 @@ public class Spreadsheet implements Serializable {
   public Cell getCell(int row, int column) throws InvalidCellException{
     
     if (isValidCell(row, column)){
-      return storageStrategy.getCell(row, column);   // Returns the cell when valid coordinates are provided
+      return _storageStrategy.getCell(row, column);   // Returns the cell when valid coordinates are provided
     }
     else{
       throw new InvalidCellException("Invalid cell coordinates: (" + row + "," + column +").");   
@@ -147,5 +153,27 @@ public class Spreadsheet implements Serializable {
     }
     
     return false; 
+  }
+
+  // State variable. Registers that something was changed
+    public void changed(){
+      _changed = true;
+  }
+
+  // State variable. Registers that everything was saved
+    public void saved() {
+      _changed = false;
+      _unsaved = false;
+  }
+  
+  // Getter for _changed state variable
+  public boolean isUnsaved(){
+    return _unsaved;
+  }
+
+  // If an error occurrs while saving, object remains unsaved
+  public void saveHasFailed(){
+    _changed = true;
+    _unsaved = true;
   }
 }

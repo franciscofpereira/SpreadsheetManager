@@ -1,6 +1,9 @@
 package xxl.app.search;
 
+import java.util.Collection;
+
 import pt.tecnico.uilib.menus.Command;
+import xxl.core.Cell;
 import xxl.core.Spreadsheet;
 // FIXME import classes
 
@@ -17,6 +20,11 @@ class DoShowFunctions extends Command<Spreadsheet> {
 
   @Override
   protected final void execute() {
+    
+    Collection<Cell> foundCells = _receiver.getStorageStrategy().lookUpFunction(stringField("Function"));
+    for(Cell c: foundCells){
+      _display.popup(c);
+    };
     // FIXME implement command
   }
 }
