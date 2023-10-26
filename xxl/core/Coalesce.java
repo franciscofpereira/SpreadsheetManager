@@ -24,6 +24,11 @@ public class Coalesce extends RangeFunction {
 
         return new LiteralString("'");  
     }
+
+    @Override
+    public Content copy() {
+        return new Coalesce(_range);
+    }
         
 }
 

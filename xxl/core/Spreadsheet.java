@@ -4,10 +4,12 @@ package xxl.core;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.exception.InvalidCellException;
 import xxl.core.exception.UnrecognizedEntryException;
+
 
 /**
  * Class representing a spreadsheet.
@@ -21,25 +23,45 @@ public class Spreadsheet implements Serializable {
   private CellStorageStrategy _storageStrategy;
   private boolean _changed;
   private boolean _unsaved;
+  private CutBuffer _cutBuffer;
   //private User _user;
 
-  public Spreadsheet( int rows, int columns){     // Spreadsheet Constructor
+  public Spreadsheet( int rows, int columns){     
     _numRows = rows;
     _numColumns = columns;
-    _storageStrategy = new TwoDimensionArrayStrategy(rows, columns); // specifies the storage strategy for the cells
     _changed = false;
-    _unsaved = true;                                                // Initializes 'changed' state to false
-    createCells();                                                  // Invokes the method that creates the Spreadsheet's Cell objects
+    _unsaved = true;                                               
+    setStorageStrategy(new TwoDimensionArrayStrategy(rows, columns)); // By default, 2D array strategy is used
+    createCells();                                                        
   }
 
-  // Creates the spreadsheet's cells objects
+  /**
+   * Setter for the Spreadsheet's cells storage strategy.
+   * Allows changing the desired storage strategy.
+   * @param storageStrategy
+   */
+  public void setStorageStrategy(CellStorageStrategy storageStrategy){
+    _storageStrategy = storageStrategy;
+  }
+
+
+  /**
+   * Getter for the Spreadsheet's cells storage strategy.
+   * @return _storageStrategy
+   */
+  public CellStorageStrategy getStorageStrategy(){
+    return _storageStrategy;
+  }
+
+
+  /**
+   * Initializes the Spreadsheet's cell objects.
+   */
   public void createCells(){                      
     _storageStrategy.createCells(_numRows, _numColumns);
   }
 
-  public CellStorageStrategy getStorageStrategy(){
-    return _storageStrategy;
-  }
+  
   /**
    * Getter for a Cell object. Returns a Cell when given its coordinates.
    *
@@ -48,7 +70,15 @@ public class Spreadsheet implements Serializable {
    * @throws InvalidCellException when specified coordinates are out of bounds of the spreadsheet
    * @returns Cell object 
    */
-  // Returns an object cell when given its coordinates
+  
+  
+   /**
+    * Returns a Cell object when given its coordinates
+    * @param row 
+    * @param column
+    * @return Cell object
+    * @throws InvalidCellException
+    */
   public Cell getCell(int row, int column) throws InvalidCellException{
     
     if (isValidCell(row, column)){
@@ -58,7 +88,16 @@ public class Spreadsheet implements Serializable {
       throw new InvalidCellException("Invalid cell coordinates: (" + row + "," + column +").");   
     }
   }
-    
+  
+
+  /**
+   * Getter for the Spreadsheet's cut buffer
+   * @return CutBuffer object
+   */
+  public CutBuffer getCutBuffer(){
+    return _cutBuffer;
+  }
+
   /**
    * Checks if a given Cell is within the bounds of the Spreadsheet
    * 
@@ -75,7 +114,7 @@ public class Spreadsheet implements Serializable {
    * Insert specified content in specified address.
    *
    * @param row the row of the cell to change 
-   * param column the column of the cell to change
+   * @param column the column of the cell to change
    * @param contentSpecification the specification in a string format of the content to put
    *        in the specified cell.
    */
@@ -87,6 +126,7 @@ public class Spreadsheet implements Serializable {
       System.err.println("Failed to insert content. Invalid cell coordinates: " + row + ";" + column);
     }
   }
+
 
   /**
    * Creates a Range object from a string description of it.
@@ -151,13 +191,13 @@ public class Spreadsheet implements Serializable {
       }
   
     }
-    
     return false; 
   }
 
   // State variable. Registers that something was changed
     public void changed(){
       _changed = true;
+      _unsaved = true;
   }
 
   // State variable. Registers that everything was saved
@@ -176,4 +216,68 @@ public class Spreadsheet implements Serializable {
     _changed = true;
     _unsaved = true;
   }
+
+
+  /**
+   * Copies the contents of the range onto the Spreadsheet's cut buffer
+   * @param range
+   * @throws UnrecognizedEntryException
+   */
+  public void copy(String range) throws UnrecognizedEntryException{
+
+    // Each time we call the copy method, the previous cutBuffer content is cleared.
+    //_cutBuffer.getCells().clear();
+    _cutBuffer = new CutBuffer();
+
+    Range cutBufferRange = createRange(range);
+
+    for(Cell c: cutBufferRange.getCellList()){
+      List<Cell> cutBufferList = _cutBuffer.getCells();
+      cutBufferList.add(c.copy());
+    }
+    
+    // Communicates to the cutbuffer which type of range was selected (HORIZONTAL,VERTICAL,SINGULAR_CELL)
+    _cutBuffer.setCutBufferRangeType(cutBufferRange.getRangeType());
+  }
+
+
+  /**
+   * Copies the contents of the range onto the Spreadsheet's cut buffer 
+   * and destroys the content of the original cell.
+   * @param range
+   * @throws UnrecognizedEntryException
+   */
+  public void cut(String range) throws UnrecognizedEntryException{
+
+    // Each time we call the cut method, the previous cutBuffer content is cleared.
+    //_cutBuffer.getCells().clear();
+    _cutBuffer = new CutBuffer();
+    
+    Range cutBufferRange = createRange(range);
+
+    for(Cell c: cutBufferRange.getCellList()){
+      List<Cell> cutBufferList = _cutBuffer.getCells();
+      cutBufferList.add(c.copy());
+      c.setContent(null);
+    }
+
+    // Communicates to the cutbuffer which type of range was selected (HORIZONTAL,VERTICAL,SINGULAR_CELL)
+    _cutBuffer.setCutBufferRangeType(cutBufferRange.getRangeType());
+
+
+  }
+
+
+  /**
+   * Deletes the contents of cells within the given range. 
+   * @param range
+   * @throws UnrecognizedEntryException
+   */
+  public void delete(String range) throws UnrecognizedEntryException{
+    Range cutBufferRange = createRange(range);
+    for(Cell c: cutBufferRange.getCellList()){
+      c.setContent(null);
+    }
+  }
+
 }

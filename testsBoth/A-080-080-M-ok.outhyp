@@ -16,6 +16,7 @@ Menu de Edição
 7 - Mostrar 'cut buffer'
 0 - Sair
 Escolha uma opção: 3
+Especifique a gama (startline;startcol:endline;endcol): 1;2:3;2
 Menu de Edição
 1 - Visualizar
 2 - Inserir
@@ -25,8 +26,6 @@ Menu de Edição
 6 - Colar
 7 - Mostrar 'cut buffer'
 0 - Sair
-Escolha uma opção: 1;2:3;2
-Número inválido!
 Escolha uma opção: 6
 Menu de Edição
 1 - Visualizar

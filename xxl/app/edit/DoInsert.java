@@ -33,6 +33,7 @@ class DoInsert extends Command<Spreadsheet> {
         // Now that the range is successfully created, tries to insert the content
         try {
             range.insertRangeContent(stringField("content"));
+            //_receiver.changed();
         } catch (UnrecognizedFunctionException ufe) {
             // If the content is an inexistent function, throws UnknownFunctionException
             throw new UnknownFunctionException(stringField("content"));

@@ -34,6 +34,12 @@ public class LiteralInteger extends Literal {
     public Literal compute(){
         return this;
     }
+
+
+    @Override
+    public Content copy() {
+        return new LiteralInteger(_value);
+    }
     
     
     

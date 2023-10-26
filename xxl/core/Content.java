@@ -14,6 +14,8 @@ public abstract class Content implements Serializable {
 
     public abstract String toString();
 
+    public abstract Content copy(); 
+
     public String asString() throws UnsupportedConversionException{
         return value().asString();   //FIXME maybe its just ""
     }

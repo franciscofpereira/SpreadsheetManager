@@ -1,18 +1,7 @@
 *** testsBoth/A-072-072-M-ok.out	2023-10-19 17:31:47.054047000 +0100
---- testsBoth/A-072-072-M-ok.outhyp	2023-10-25 14:27:40.407873711 +0100
+--- testsBoth/A-072-072-M-ok.outhyp	2023-10-26 03:15:14.904014659 +0100
 ***************
-*** 16,22 ****
-  7 - Mostrar 'cut buffer'
-  0 - Sair
-  Escolha uma opção: 3
-- Especifique a gama (startline;startcol:endline;endcol): 1;1:1;3
-  Menu de Edição
-  1 - Visualizar
-  2 - Inserir
---- 16,21 ----
-***************
-*** 26,33 ****
-  6 - Colar
+*** 27,33 ****
   7 - Mostrar 'cut buffer'
   0 - Sair
   Escolha uma opção: 6
@@ -20,16 +9,7 @@
   Menu de Edição
   1 - Visualizar
   2 - Inserir
---- 25,33 ----
-  6 - Colar
-  7 - Mostrar 'cut buffer'
-  0 - Sair
-+ Escolha uma opção: 1;1:1;3
-+ Número inválido!
-  Escolha uma opção: 6
-  Menu de Edição
-  1 - Visualizar
-  2 - Inserir
+--- 27,32 ----
 ***************
 *** 37,47 ****
   6 - Colar
@@ -43,7 +23,7 @@
   Menu de Edição
   1 - Visualizar
   2 - Inserir
---- 37,49 ----
+--- 36,48 ----
   6 - Colar
   7 - Mostrar 'cut buffer'
   0 - Sair
@@ -66,7 +46,7 @@
   Menu de Edição
   1 - Visualizar
   2 - Inserir
---- 54,59 ----
+--- 53,58 ----
 ***************
 *** 62,72 ****
   6 - Colar
@@ -80,7 +60,7 @@
   Menu de Edição
   1 - Visualizar
   2 - Inserir
---- 63,75 ----
+--- 62,74 ----
   6 - Colar
   7 - Mostrar 'cut buffer'
   0 - Sair

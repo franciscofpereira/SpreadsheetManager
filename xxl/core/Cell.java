@@ -52,5 +52,27 @@ public class Cell implements Serializable{
         return _row + ";" + _column + "|" + _content.toString();
     }
 
+    public String viewInCutBuffer(){
+        
+        if(_content == null){
+            return "";
+        }
+        return _content.toString();
+
+    }
+    public Cell copy(){
+        
+        Cell copiedCell = new Cell(_row, _column);
+        
+        // If the content of this cell is null, the content of copiedCell will also be null
+        if(_content == null){
+            copiedCell.setContent(null);
+        }
+        else{
+            Content copiedContent = _content.copy();
+            copiedCell.setContent(copiedContent);
+        }
+        return copiedCell;
+    }
 }
 

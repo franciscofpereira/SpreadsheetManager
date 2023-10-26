@@ -45,4 +45,9 @@ public class Reference extends Content{
         
         return value();
     }
+
+    @Override
+    public Content copy() {
+        return new Reference(_row, _column, _spreadsheet);
+    }
 }

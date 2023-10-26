@@ -2,8 +2,10 @@ package xxl.app.edit;
 
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
+import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.Spreadsheet;
 // FIXME import classes
+import xxl.core.exception.UnrecognizedEntryException;
 
 /**
  * Delete command.
@@ -12,11 +14,16 @@ class DoDelete extends Command<Spreadsheet> {
 
   DoDelete(Spreadsheet receiver) {
     super(Label.DELETE, receiver);
-    // FIXME add fields
+    addStringField("range", Message.address());
   }
   
   @Override
   protected final void execute() throws CommandException {
-    // FIXME implement command
+    
+    try{
+      _receiver.delete(stringField("range"));
+    } catch(UnrecognizedEntryException uee){
+      throw new InvalidCellRangeException(stringField("range"));
+    }
   }
 }

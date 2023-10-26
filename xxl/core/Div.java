@@ -16,6 +16,11 @@ public class Div extends BinaryFunction{
         } catch(UnsupportedConversionException| NullPointerException e){
             return new LiteralString("#VALUE");
         }     
+    }
+
+    @Override
+    public Content copy() {
+        return new Div(super._arg1, super._arg2);
     }   
 }
 

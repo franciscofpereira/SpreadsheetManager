@@ -12,6 +12,7 @@ public class User implements Serializable{
     
     private String _name;
     private List<Spreadsheet> _userSpreadsheets;
+    private Spreadsheet _activeSpreadsheet;
     private int _numSpreadsheets;
 
     public User(String name){
@@ -25,6 +26,9 @@ public class User implements Serializable{
         ++_numSpreadsheets;
     }
 
+    public String getName(){
+        return _name;
+    }
     // public boolean equals(Object obj){}
 
     // public in hashCode(){}

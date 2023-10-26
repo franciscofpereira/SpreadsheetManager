@@ -17,4 +17,9 @@ public class Sub extends BinaryFunction{
             return new LiteralString("#VALUE");
         }  
     }
+
+    @Override
+    public Content copy() {
+        return new Sub(super._arg1, super._arg2);
+    }
 }

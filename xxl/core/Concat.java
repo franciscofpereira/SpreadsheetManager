@@ -28,6 +28,12 @@ public class Concat extends RangeFunction{
 
         return new LiteralString(res);  
     }
+
+
+    @Override
+    public Content copy() {
+        return new Concat(_range);
+    }
         
 }
     

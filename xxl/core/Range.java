@@ -1,5 +1,7 @@
 package xxl.core;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +9,11 @@ import xxl.core.exception.InvalidCellException;
 import xxl.core.exception.UnrecognizedEntryException;
 import xxl.core.exception.UnrecognizedFunctionException;
 
+public class Range implements Serializable {
+    
+    @Serial
+    private static final long serialVersionUID = 9876543210L;
 
-public class Range {
     private int _beginRow;
     private int _beginColumn;
     private int _endRow;
@@ -16,7 +21,8 @@ public class Range {
     private List<Cell> _cellList = new ArrayList<>();
     private Spreadsheet _spreadsheet;
     private String _rangeDescriptioString;
-
+    private RangeType _type;
+    
     public Range(int beginRow, int beginColumn, int endRow, int endColumn, String range, Spreadsheet spreadsheet){
         _beginRow = beginRow;
         _beginColumn = beginColumn;
@@ -36,6 +42,8 @@ public class Range {
         try{
             // Case of horizontal Range
             if(_beginRow == _endRow && _beginColumn != _endColumn){
+                
+                _type = RangeType.HORIZONTAL;
                 // Ascending order
                 if(_beginColumn < _endColumn){
                     for ( int col = _beginColumn; col <= _endColumn; col++){
@@ -55,6 +63,8 @@ public class Range {
                 
             // Case of vertical Range
             if(_beginRow != _endRow && _beginColumn == _endColumn){
+
+                _type = RangeType.VERTICAL;
                 // Ascending order
                 if(_beginRow < _endRow){
                     for ( int row = _beginRow; row <= _endRow; row++){
@@ -74,6 +84,7 @@ public class Range {
 
             // Case of singular cell
             if((_beginRow == _endRow && _beginRow == _endRow)){
+                _type = RangeType.SINGULAR_CELL;
                 Cell cell = _spreadsheet.getCell(_beginRow, _beginColumn);
                 _cellList.add(cell);
                 return _cellList;
@@ -101,4 +112,9 @@ public class Range {
             _spreadsheet.insertContent(cell.getRow(), cell.getColumn(), content);
         }  
     }
+
+    public RangeType getRangeType(){
+        return _type;
+    }
 }
+

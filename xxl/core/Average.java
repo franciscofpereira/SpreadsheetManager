@@ -26,4 +26,9 @@ public class Average extends RangeFunction {
             return new LiteralString("#VALUE");
         }
     }
+
+    @Override
+    public Content copy() {
+        return new Average(_range);
+    }
 }

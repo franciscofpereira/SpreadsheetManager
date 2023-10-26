@@ -33,5 +33,10 @@ public class LiteralString extends Literal {
     public int asInt() throws UnsupportedConversionException{
         throw new UnsupportedConversionException("Cannot convert a LiteralString to an integer");
     }
+
+    @Override
+    public Content copy() {
+        return new LiteralString(_value);
+    }
    
 }

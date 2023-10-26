@@ -33,12 +33,12 @@ public class Calculator implements Serializable {
   // The current spreadsheet
   private Spreadsheet _spreadsheet;
   
-  // The current associated file (if it's an empty string then it means there isn't an associated file)
+  // The current associated file (empty string means no associated file)
   private String _currentFile = "";
   
   // Root user, active user, and list of users
   private User _root = new User("root");
-  private User _activeUser;
+  private User _activeUser = _root;
   private List<User> _users = new ArrayList<>();
   
   
@@ -97,14 +97,15 @@ public class Calculator implements Serializable {
           
       Calculator loadedCalculator = (Calculator) ois.readObject();
         
-        this._spreadsheet = loadedCalculator._spreadsheet;
-        this._currentFile = loadedCalculator._currentFile;
+      this._spreadsheet = loadedCalculator._spreadsheet;
+      this._currentFile = loadedCalculator._currentFile;
 
-        } catch (IOException | ClassNotFoundException e) {
-            throw new UnavailableFileException(filename);
-        }  
+      }catch (IOException | ClassNotFoundException e) {
+        throw new UnavailableFileException(filename);
+      }  
   }
   
+
   /**
    * Read text input file and create domain entities.
    *
@@ -122,6 +123,7 @@ public class Calculator implements Serializable {
     }
   } 
 
+  
   /**
    * Creates a new Spreadsheet object when given the number of rows and columns.
    * This method is used in DoNew Command to create a new Spreadsheet object with user input data.
@@ -135,7 +137,27 @@ public class Calculator implements Serializable {
   //FIXME implement stuff regarding User
   }
 
+
+  /**
+   * Creates a new User object when given a name.
+   * 
+   * @param name
+   * @return boolean: true if user is successfully created, false if otherwise
+   */
+  public boolean createUser(String name){
+    
+    for(User user: _users){
+      // if there's already a user with the given name, returns false
+      if(user.getName().equals(name)){
+        return false;
+      }
+    }
+    
+    _users.add(new User(name));
+    return true;
+  }
   
+
   /**
   * Checks if a file has been associated with the current instance.
   * @returns True if a file has been associated, false otherwise.

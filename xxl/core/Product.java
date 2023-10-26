@@ -21,5 +21,10 @@ public class Product extends RangeFunction{
             return new LiteralString("#VALUE");
         }
     }
+
+    @Override
+    public Content copy() {
+        return new Product(_range);
+    }
     
 }
