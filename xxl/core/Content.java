@@ -17,7 +17,7 @@ public abstract class Content implements Serializable {
     public abstract Content copy(); 
 
     public String asString() throws UnsupportedConversionException{
-        return value().asString();   //FIXME maybe its just ""
+        return value().asString();   
     }
     
     public int asInt() throws UnsupportedConversionException{

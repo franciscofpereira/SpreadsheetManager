@@ -29,7 +29,7 @@ public class LiteralString extends Literal {
         return this;
     }
 
-    // FIXME isto vai dar throw a uma exception
+    
     public int asInt() throws UnsupportedConversionException{
         throw new UnsupportedConversionException("Cannot convert a LiteralString to an integer");
     }

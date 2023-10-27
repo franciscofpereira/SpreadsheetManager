@@ -29,6 +29,7 @@ public class User implements Serializable{
     public String getName(){
         return _name;
     }
+    
     // public boolean equals(Object obj){}
 
     // public in hashCode(){}

@@ -6,7 +6,6 @@ import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.Cell;
 import xxl.core.Range;
 import xxl.core.Spreadsheet;
-// FIXME import classes
 import xxl.core.exception.UnrecognizedEntryException;
 
 /**
@@ -17,7 +16,6 @@ class DoShow extends Command<Spreadsheet> {
   DoShow(Spreadsheet receiver) {
     super(Label.SHOW, receiver);
     addStringField("range", Message.address()); 
-    // FIXME add fields
   }
   
   @Override

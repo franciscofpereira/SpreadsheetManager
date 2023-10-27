@@ -118,7 +118,7 @@ public class Calculator implements Serializable {
       Parser p = new Parser();
       _spreadsheet = p.parseFile(filename);
        
-   } catch (IOException | UnrecognizedEntryException | UnrecognizedFunctionException/* FIXME maybe other exceptions */ e) {
+   } catch (IOException | UnrecognizedEntryException | UnrecognizedFunctionException e) {
       throw new ImportFileException(filename, e);
     }
   } 

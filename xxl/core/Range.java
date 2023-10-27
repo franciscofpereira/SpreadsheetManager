@@ -22,6 +22,7 @@ public class Range implements Serializable {
     private Spreadsheet _spreadsheet;
     private String _rangeDescriptioString;
     private RangeType _type;
+    private int _direction;
     
     public Range(int beginRow, int beginColumn, int endRow, int endColumn, String range, Spreadsheet spreadsheet){
         _beginRow = beginRow;
@@ -46,6 +47,7 @@ public class Range implements Serializable {
                 _type = RangeType.HORIZONTAL;
                 // Ascending order
                 if(_beginColumn < _endColumn){
+                    _direction = 1;
                     for ( int col = _beginColumn; col <= _endColumn; col++){
                         Cell cell = _spreadsheet.getCell(_beginRow,col);
                         _cellList.add(cell);   
@@ -53,6 +55,7 @@ public class Range implements Serializable {
                 }
                 // Descending order
                 else{
+                    _direction = -1;
                     for( int col = _beginColumn; col>=_endColumn; col--){
                         Cell cell = _spreadsheet.getCell(_beginRow,col);
                         _cellList.add(cell); 
@@ -67,6 +70,7 @@ public class Range implements Serializable {
                 _type = RangeType.VERTICAL;
                 // Ascending order
                 if(_beginRow < _endRow){
+                    _direction = 1;
                     for ( int row = _beginRow; row <= _endRow; row++){
                         Cell cell = _spreadsheet.getCell(row, _beginColumn);
                         _cellList.add(cell);   
@@ -74,6 +78,7 @@ public class Range implements Serializable {
                 }
                 // Descending order
                 else{
+                    _direction = -1;
                     for( int row = _beginRow; row >= _endRow; row--){
                         Cell cell = _spreadsheet.getCell(row, _beginColumn);
                         _cellList.add(cell);
@@ -85,6 +90,7 @@ public class Range implements Serializable {
             // Case of singular cell
             if((_beginRow == _endRow && _beginRow == _endRow)){
                 _type = RangeType.SINGULAR_CELL;
+                _direction = 0;
                 Cell cell = _spreadsheet.getCell(_beginRow, _beginColumn);
                 _cellList.add(cell);
                 return _cellList;
@@ -96,6 +102,10 @@ public class Range implements Serializable {
         return null;
     }   
 
+    public int getRangeDirection(){
+        return _direction;
+    }
+    
     // Getter for the _cellList field
     public List<Cell> getCellList(){
         return _cellList;
@@ -112,7 +122,7 @@ public class Range implements Serializable {
             _spreadsheet.insertContent(cell.getRow(), cell.getColumn(), content);
         }  
     }
-
+    
     public RangeType getRangeType(){
         return _type;
     }

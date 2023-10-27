@@ -7,7 +7,6 @@ import xxl.core.Cell;
 import xxl.core.FunctionSearchCriteria;
 import xxl.core.SearchCriteria;
 import xxl.core.Spreadsheet;
-// FIXME import classes
 
 /**
  * Command for searching function names.
@@ -17,7 +16,6 @@ class DoShowFunctions extends Command<Spreadsheet> {
   DoShowFunctions(Spreadsheet receiver) {
     super(Label.SEARCH_FUNCTIONS, receiver);
     addStringField("Function", Message.searchFunction());
-    // FIXME add fields
   }
 
   @Override
@@ -28,6 +26,5 @@ class DoShowFunctions extends Command<Spreadsheet> {
     for(Cell c: foundCells){
       _display.popup(c);
     };
-    // FIXME implement command
   }
 }

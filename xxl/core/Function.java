@@ -15,7 +15,7 @@ public abstract class Function extends Content {
     
     @Override
     public String asString() throws UnsupportedConversionException{
-        return compute().asString();        // FIXME vai dar return compute.AsString()
+        return compute().asString();        
     }
 
     @Override
@@ -25,6 +25,14 @@ public abstract class Function extends Content {
 
     @Override
     public Literal value(){
-        return compute();        // FIXME
+        return compute();        
+    }
+
+    public String getFunctionName() {
+        return _functionName;
+    }
+
+    public void accept(FunctionVisitor visitor){
+        visitor.visit(this);
     }
 }

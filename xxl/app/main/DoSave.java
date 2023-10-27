@@ -1,11 +1,11 @@
 package xxl.app.main;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import pt.tecnico.uilib.forms.Form;
 import pt.tecnico.uilib.menus.Command;
 import xxl.core.Calculator;
-// FIXME import classes
 import xxl.core.exception.MissingFileAssociationException;
 
 /**
@@ -44,9 +44,8 @@ class DoSave extends Command<Calculator> {
               _receiver.getSpreadsheet().saveHasFailed();  
             }
         }
-    } catch (IOException ioe){
+    } catch ( IOException ioe){
       _receiver.getSpreadsheet().saveHasFailed();
     }  
-    // FIXME implement command and create a local Form
   }
 }

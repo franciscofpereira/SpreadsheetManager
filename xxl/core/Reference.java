@@ -1,7 +1,6 @@
 package xxl.core;
 
 import xxl.core.exception.InvalidCellException;
-import xxl.core.exception.UnsupportedConversionException;
 
 public class Reference extends Content{
     
@@ -23,6 +22,7 @@ public class Reference extends Content{
     public String asArg(){
         return _row + ";" + _column;
     }
+    
     // Getter for Literal value stored in referenced cell
     Literal value(){
         
@@ -42,7 +42,6 @@ public class Reference extends Content{
         if(value() == null){
             return new LiteralString("#VALUE");
         }
-        
         return value();
     }
 

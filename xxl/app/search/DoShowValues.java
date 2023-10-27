@@ -7,7 +7,6 @@ import pt.tecnico.uilib.menus.Command;
 import xxl.core.Cell;
 import xxl.core.SearchCriteria;
 import xxl.core.Spreadsheet;
-// FIXME import classes
 import xxl.core.ValueSearchCriteria;
 
 /**
@@ -23,7 +22,6 @@ class DoShowValues extends Command<Spreadsheet> {
   
   @Override
   protected final void execute() {
-    // FIXME implement command
     SearchCriteria criteria = new ValueSearchCriteria(stringField("Value"));
     Collection<Cell> foundCells = _receiver.getStorageStrategy().lookUp(criteria);
     for(Cell c: foundCells){

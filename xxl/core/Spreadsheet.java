@@ -1,9 +1,8 @@
 package xxl.core;
 
-// FIXME import classes
-
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 import xxl.app.exception.InvalidCellRangeException;
@@ -23,7 +22,7 @@ public class Spreadsheet implements Serializable {
   private CellStorageStrategy _storageStrategy;
   private boolean _changed;
   private boolean _unsaved;
-  private CutBuffer _cutBuffer;
+  private CutBuffer _cutBuffer = new CutBuffer();
   //private User _user;
 
   public Spreadsheet( int rows, int columns){     
@@ -44,7 +43,7 @@ public class Spreadsheet implements Serializable {
     _storageStrategy = storageStrategy;
   }
 
-
+ 
   /**
    * Getter for the Spreadsheet's cells storage strategy.
    * @return _storageStrategy
@@ -70,15 +69,6 @@ public class Spreadsheet implements Serializable {
    * @throws InvalidCellException when specified coordinates are out of bounds of the spreadsheet
    * @returns Cell object 
    */
-  
-  
-   /**
-    * Returns a Cell object when given its coordinates
-    * @param row 
-    * @param column
-    * @return Cell object
-    * @throws InvalidCellException
-    */
   public Cell getCell(int row, int column) throws InvalidCellException{
     
     if (isValidCell(row, column)){
@@ -225,20 +215,22 @@ public class Spreadsheet implements Serializable {
    */
   public void copy(String range) throws UnrecognizedEntryException{
 
-    // Each time we call the copy method, the previous cutBuffer content is cleared.
-    //_cutBuffer.getCells().clear();
-    _cutBuffer = new CutBuffer();
+    // Each time we call the cut method, the previous cutBuffer content is destroyed
+    if(_cutBuffer.getCells()!=null){_cutBuffer.getCells().clear();}
 
     Range cutBufferRange = createRange(range);
 
+    // Copies the cells over to the cutBuffer
     for(Cell c: cutBufferRange.getCellList()){
       List<Cell> cutBufferList = _cutBuffer.getCells();
       cutBufferList.add(c.copy());
     }
     
-    // Communicates to the cutbuffer which type of range was selected (HORIZONTAL,VERTICAL,SINGULAR_CELL)
+    // Communicates to the cutbuffer which type of range was selected and its direction
     _cutBuffer.setCutBufferRangeType(cutBufferRange.getRangeType());
+    _cutBuffer.setDirection(cutBufferRange.getRangeDirection());
   }
+
 
 
   /**
@@ -249,23 +241,23 @@ public class Spreadsheet implements Serializable {
    */
   public void cut(String range) throws UnrecognizedEntryException{
 
-    // Each time we call the cut method, the previous cutBuffer content is cleared.
-    //_cutBuffer.getCells().clear();
-    _cutBuffer = new CutBuffer();
+    // Each time we call the cut method, the previous cutBuffer content is destroyed
+    if(_cutBuffer.getCells()!=null){_cutBuffer.getCells().clear();}
     
     Range cutBufferRange = createRange(range);
 
+    // Copies the cells over to the cutBuffer and destroys the content at the original cell
     for(Cell c: cutBufferRange.getCellList()){
       List<Cell> cutBufferList = _cutBuffer.getCells();
       cutBufferList.add(c.copy());
       c.setContent(null);
     }
 
-    // Communicates to the cutbuffer which type of range was selected (HORIZONTAL,VERTICAL,SINGULAR_CELL)
+    // Communicates to the cutbuffer which type of range was selected and its direction
     _cutBuffer.setCutBufferRangeType(cutBufferRange.getRangeType());
-
-
+    _cutBuffer.setDirection(cutBufferRange.getRangeDirection());
   }
+
 
 
   /**
@@ -280,4 +272,101 @@ public class Spreadsheet implements Serializable {
     }
   }
 
+  
+  
+  /**
+   * Pastes the contents from the cutBuffer to the given range.
+   * @param range
+   * @throws UnrecognizedEntryException
+   * @throws InvalidCellException
+   */
+  public void paste(String range) throws UnrecognizedEntryException, InvalidCellException{
+    
+    Range destinationRange = createRange(range);
+
+    // If the cutBuffer hasn't yet been initialized, or it is empty, nothing happens
+    if(_cutBuffer == null || _cutBuffer.getCells().size() == 0){
+      return;
+    }
+
+    // Pasting a range into a singular cell
+    if(destinationRange.getCellList().size() == 1){
+      
+      // Gets direction of the cutBuffer range. +1 for ascending, -1 for descending
+      int direction = _cutBuffer.getDirection();
+
+      // Gets cutBuffer range type (HORIZONTAL, VERTICAL, SINGULAR_CELL)
+      RangeType type = _cutBuffer.getCutBufferRangeType();
+         
+      // limit: Represents the Spreadsheet limit condition for which we will be checking while pasting
+      // i and z: Represent the coordinates of the cell we are pasting to.  
+      int limit = 0, i = 0, z = 0;
+
+      if (type == RangeType.VERTICAL) {
+          limit = _numRows;
+          i = destinationRange.getCellList().get(0).getRow();
+          z = destinationRange.getCellList().get(0).getColumn();
+      } else if (type == RangeType.HORIZONTAL) {
+          limit = _numColumns;
+          i = destinationRange.getCellList().get(0).getColumn();
+          z = destinationRange.getCellList().get(0).getRow();
+      } else if (type == RangeType.SINGULAR_CELL) {
+          limit = _numRows;  
+          i = destinationRange.getCellList().get(0).getRow();  
+      }
+
+      Iterator<Cell> cutBuffer = _cutBuffer.getCells().iterator();
+      
+      // j is the iterator counter for the while loop
+      int j = 0;
+
+      // The baseline condition is that the cutBuffer still has content to paste and we are within the Spreadsheet's limits
+      while(cutBuffer.hasNext() && 1<= i && i<= limit ){
+
+        // We iterate through the cutBuffer and get the contentToPaste
+        Content contentToPaste = _cutBuffer.getCells().get(j).getContent();
+        
+        // Pastes to the cell specified by the user.
+        if(j==0){
+          destinationRange.getCellList().get(0).setContent(contentToPaste);
+        }
+        
+        // Keeps pasting to the adjacent cells to the one specified (in the same orientation and direction as the copied range)
+        if(j>=1){
+          if (type == RangeType.VERTICAL){
+            this.getCell(i, z).setContent(contentToPaste);
+          }
+          else{
+            this.getCell(z, i).setContent(contentToPaste);
+          }
+        }
+        
+        // Moves to the next element in the cutBuffer iterator
+        cutBuffer.next();
+
+        // Moves to the next adjacent cell in the same direction as the copied Range
+        i += direction;
+        j++;
+      }
+    }
+    
+    // Pasting between ranges
+    if(destinationRange.getCellList().size() > 1 &&_cutBuffer.getCells().size() > 1){
+
+      // Case in which the copied range and destination range dimensions differ (nothing happens)
+      if((_cutBuffer.getCells().size() != destinationRange.getCellList().size()))
+        return;
+
+      // If they are the same, performs the pasting.
+      else{
+        for(int i=0; i<destinationRange.getCellList().size(); i++){
+            Cell destinationCell = destinationRange.getCellList().get(i);
+            Cell copiedCell = _cutBuffer.getCells().get(i);
+            // copies the content over to the destinationCell
+            destinationCell.setContent(copiedCell.getContent());
+          }  
+      }
+    }
+  }
 }
+

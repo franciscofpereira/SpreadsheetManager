@@ -2,8 +2,10 @@ package xxl.app.edit;
 
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
+import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.Spreadsheet;
-// FIXME import classes
+import xxl.core.exception.InvalidCellException;
+import xxl.core.exception.UnrecognizedEntryException;
 
 /**
  * Paste command.
@@ -17,6 +19,12 @@ class DoPaste extends Command<Spreadsheet> {
   
   @Override
   protected final void execute() throws CommandException {
-    // FIXME implement command
+    
+    try{
+      _receiver.paste(stringField("range"));
+      _receiver.changed();
+    } catch(UnrecognizedEntryException | InvalidCellException uee){
+      throw new InvalidCellRangeException(stringField("range"));
+    }
   }
 }

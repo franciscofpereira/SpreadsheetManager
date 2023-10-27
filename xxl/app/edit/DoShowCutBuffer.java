@@ -4,7 +4,6 @@ import java.util.List;
 
 import pt.tecnico.uilib.menus.Command;
 import xxl.core.Spreadsheet;
-// FIXME import classes
 
 /**
  * Show cut buffer command.
@@ -17,7 +16,6 @@ class DoShowCutBuffer extends Command<Spreadsheet> {
   
   @Override
   protected final void execute() {
-    // FIXME implement command
     
     List<String> cutBufferContent = _receiver.getCutBuffer().cutBufferViewerBuilder();
 

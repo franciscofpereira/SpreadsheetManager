@@ -8,7 +8,6 @@ import xxl.core.Spreadsheet;
 import xxl.app.exception.FileOpenFailedException;
 import xxl.core.exception.UnavailableFileException;
 
-// FIXME import classes
 
 /**
  * Open existing file.
