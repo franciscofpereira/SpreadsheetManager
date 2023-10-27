@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import xxl.core.exception.InvalidCellException;
+import xxl.core.exception.UnrecognizedEntryException;
+
 
 /**
  * Class that contains the implementation of the methods for the 2D array storage strategy
@@ -37,7 +38,7 @@ public class TwoDimensionArrayStrategy implements CellStorageStrategy, Serializa
     }
 
     @Override
-    public Cell getCell(int row, int column) throws InvalidCellException {
+    public Cell getCell(int row, int column) throws UnrecognizedEntryException {
         return _cells[row - 1][column - 1];   
     }
 

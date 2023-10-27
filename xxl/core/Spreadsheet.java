@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import xxl.app.exception.InvalidCellRangeException;
-import xxl.core.exception.InvalidCellException;
 import xxl.core.exception.UnrecognizedEntryException;
 
 
@@ -33,6 +32,7 @@ public class Spreadsheet implements Serializable {
     setStorageStrategy(new TwoDimensionArrayStrategy(rows, columns)); // By default, 2D array strategy is used
     createCells();                                                        
   }
+
 
   /**
    * Setter for the Spreadsheet's cells storage strategy.
@@ -66,16 +66,16 @@ public class Spreadsheet implements Serializable {
    *
    * @param row row of Cell object
    * @param column column of Cell object
-   * @throws InvalidCellException when specified coordinates are out of bounds of the spreadsheet
+   * @throws UnrecognizedEntryException when specified coordinates are out of bounds of the spreadsheet
    * @returns Cell object 
    */
-  public Cell getCell(int row, int column) throws InvalidCellException{
+  public Cell getCell(int row, int column) throws UnrecognizedEntryException{
     
     if (isValidCell(row, column)){
       return _storageStrategy.getCell(row, column);   // Returns the cell when valid coordinates are provided
     }
     else{
-      throw new InvalidCellException("Invalid cell coordinates: (" + row + "," + column +").");   
+      throw new UnrecognizedEntryException("Invalid cell coordinates: (" + row + "," + column +").");   
     }
   }
   
@@ -87,6 +87,7 @@ public class Spreadsheet implements Serializable {
   public CutBuffer getCutBuffer(){
     return _cutBuffer;
   }
+
 
   /**
    * Checks if a given Cell is within the bounds of the Spreadsheet
@@ -108,13 +109,8 @@ public class Spreadsheet implements Serializable {
    * @param contentSpecification the specification in a string format of the content to put
    *        in the specified cell.
    */
-  public void insertContent(int row, int column, Content contentSpecification){ //throws UnrecognizedEntryException /* FIXME maybe add exceptions */ {
-    
-    try{
-      getCell(row, column).setContent(contentSpecification);
-    } catch (InvalidCellException ice){
-      System.err.println("Failed to insert content. Invalid cell coordinates: " + row + ";" + column);
-    }
+  public void insertContent(int row, int column, Content contentSpecification) throws UnrecognizedEntryException{
+    getCell(row, column).setContent(contentSpecification); 
   }
 
 
@@ -179,11 +175,11 @@ public class Spreadsheet implements Serializable {
       if(beginRow == endRow && beginColumn == endColumn){
         return true;
       }
-  
     }
     return false; 
   }
 
+  
   // State variable. Registers that something was changed
     public void changed(){
       _changed = true;
@@ -278,9 +274,8 @@ public class Spreadsheet implements Serializable {
    * Pastes the contents from the cutBuffer to the given range.
    * @param range
    * @throws UnrecognizedEntryException
-   * @throws InvalidCellException
    */
-  public void paste(String range) throws UnrecognizedEntryException, InvalidCellException{
+  public void paste(String range) throws UnrecognizedEntryException{
     
     Range destinationRange = createRange(range);
 

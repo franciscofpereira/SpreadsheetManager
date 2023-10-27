@@ -4,7 +4,6 @@ import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.Spreadsheet;
-import xxl.core.exception.InvalidCellException;
 import xxl.core.exception.UnrecognizedEntryException;
 
 /**
@@ -23,7 +22,7 @@ class DoPaste extends Command<Spreadsheet> {
     try{
       _receiver.paste(stringField("range"));
       _receiver.changed();
-    } catch(UnrecognizedEntryException | InvalidCellException uee){
+    } catch(UnrecognizedEntryException  uee){
       throw new InvalidCellRangeException(stringField("range"));
     }
   }

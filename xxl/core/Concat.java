@@ -2,6 +2,9 @@ package xxl.core;
 
 import xxl.core.exception.UnsupportedConversionException;
 
+/**
+ * Class that represents the CONCAT function.
+ */
 public class Concat extends RangeFunction{
 
     public Concat(Range range){

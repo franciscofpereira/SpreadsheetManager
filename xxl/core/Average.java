@@ -2,6 +2,9 @@ package xxl.core;
 
 import xxl.core.exception.UnsupportedConversionException;
 
+/**
+ * Class that represents the AVERAGE function.
+ */
 public class Average extends RangeFunction {
     
     public Average(Range range){

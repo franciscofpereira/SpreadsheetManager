@@ -2,6 +2,9 @@ package xxl.core;
 
 import xxl.core.exception.UnsupportedConversionException;
 
+/**
+ * Class that represents the PRODUCT function.
+ */
 public class Product extends RangeFunction{
 
     public Product(Range range){

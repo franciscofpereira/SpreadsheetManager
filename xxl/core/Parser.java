@@ -9,6 +9,9 @@ import java.io.Reader;
 import xxl.core.exception.UnrecognizedEntryException;
 import xxl.core.exception.UnrecognizedFunctionException;
 
+/**
+ * Class responsible for parsing an import file and intializing all objects specified in it.
+ */
 class Parser {
 
   private Spreadsheet _spreadsheet;

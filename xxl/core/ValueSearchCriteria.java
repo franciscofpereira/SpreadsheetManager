@@ -1,5 +1,8 @@
 package xxl.core;
 
+/**
+ * Class that represents the search criteria for a value lookup.
+ */
 public class ValueSearchCriteria implements SearchCriteria {
     
     private String _valueToFind;

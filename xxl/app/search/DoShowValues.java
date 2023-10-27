@@ -1,6 +1,5 @@
 package xxl.app.search;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import pt.tecnico.uilib.menus.Command;
@@ -17,7 +16,6 @@ class DoShowValues extends Command<Spreadsheet> {
   DoShowValues(Spreadsheet receiver) {
     super(Label.SEARCH_VALUES, receiver);
     addStringField("Value", Message.searchValue());
-    // FIXME add fields
   }
   
   @Override

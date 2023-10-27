@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import xxl.core.exception.InvalidCellException;
 import xxl.core.exception.UnrecognizedEntryException;
 import xxl.core.exception.UnrecognizedFunctionException;
 
@@ -34,6 +33,7 @@ public class Range implements Serializable {
         initializeRangeCellList();
     }
     
+    // Used to represent the range as an argument of a RangeFunction
     public String asArg(){
         return _rangeDescriptioString;
     }
@@ -95,13 +95,14 @@ public class Range implements Serializable {
                 _cellList.add(cell);
                 return _cellList;
             }
-        } catch(InvalidCellException ice){
+        } catch(UnrecognizedEntryException ice){
             System.err.println("Attempt to add invalid cell to Range _cellList.");
         }    
         
         return null;
     }   
 
+    // Getter for the direction of the range. (+1 for ascending -1 for descending)
     public int getRangeDirection(){
         return _direction;
     }
@@ -123,6 +124,7 @@ public class Range implements Serializable {
         }  
     }
     
+    // Getter for RangeType (HORIZONTAL,VERTICAL,SINGULAR_CELL)
     public RangeType getRangeType(){
         return _type;
     }

@@ -21,6 +21,7 @@ class DoDelete extends Command<Spreadsheet> {
     
     try{
       _receiver.delete(stringField("range"));
+      _receiver.changed();
     } catch(UnrecognizedEntryException uee){
       throw new InvalidCellRangeException(stringField("range"));
     }

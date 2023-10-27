@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class that represents the cut buffer of a spreadsheet.
+ */
 public class CutBuffer implements Serializable{
     
     @Serial

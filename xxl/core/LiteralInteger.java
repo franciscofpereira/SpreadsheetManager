@@ -40,9 +40,5 @@ public class LiteralInteger extends Literal {
     public Content copy() {
         return new LiteralInteger(_value);
     }
-    
-    
-    
-
-    
+     
 }

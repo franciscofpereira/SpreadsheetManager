@@ -2,6 +2,9 @@ package xxl.core;
 
 import xxl.core.exception.UnsupportedConversionException;
 
+/**
+ * Class that represents all functions in the program.
+ */
 public abstract class Function extends Content {
    
     protected String _functionName;

@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that represents a User
+ */
 public class User implements Serializable{
 
     @Serial

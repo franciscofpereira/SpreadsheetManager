@@ -1,5 +1,10 @@
 package xxl.core;
 
+/**
+ * Class that represents range functions. 
+ * These functions take in a range and operate over it, 
+ * producing integer values or string values in the form of LiteralInteger or LiteralString, respectively
+ */
 public abstract class RangeFunction extends Function {
 
     protected Range _range;

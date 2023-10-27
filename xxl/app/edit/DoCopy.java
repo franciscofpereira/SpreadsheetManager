@@ -20,6 +20,7 @@ class DoCopy extends Command<Spreadsheet> {
   protected final void execute() throws CommandException {
     try{
       _receiver.copy(stringField("range"));
+      _receiver.changed();
     } catch(UnrecognizedEntryException uee){
       throw new InvalidCellRangeException(stringField("range"));
     }

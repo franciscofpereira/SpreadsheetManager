@@ -4,7 +4,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import xxl.core.exception.UnsupportedConversionException;
 
-
+/**
+ * Class that represents the content of a cell.
+ */
 public abstract class Content implements Serializable {
     
     @Serial

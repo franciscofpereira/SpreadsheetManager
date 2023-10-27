@@ -3,7 +3,9 @@ package xxl.core;
 import java.io.Serial;
 import java.io.Serializable;
 
-
+/*
+ * Class that represents a cell in a spreadsheet.
+ */
 public class Cell implements Serializable{
 
     @Serial

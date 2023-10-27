@@ -1,5 +1,9 @@
 package xxl.core;
 
+/**
+ * Class that represents binary functions.
+ * These functions take Reference and Literal objects as arguments and produce int values in the form of LiteralInteger
+ */
 public abstract class BinaryFunction extends Function {
     
     protected Content _arg1;

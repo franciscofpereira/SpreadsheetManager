@@ -36,8 +36,6 @@ class DoOpen extends Command<Calculator> {
     } catch (UnavailableFileException e) {
       throw new FileOpenFailedException(e);
     }
-  
 
-  
   }
 }

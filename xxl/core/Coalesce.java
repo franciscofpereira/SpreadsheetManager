@@ -1,6 +1,8 @@
 package xxl.core;
 
-
+/**
+ * Class that represents the COALESCE function.
+ */
 public class Coalesce extends RangeFunction {
     
     public Coalesce(Range range){

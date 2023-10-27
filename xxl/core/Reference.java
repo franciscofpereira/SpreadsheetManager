@@ -1,6 +1,6 @@
 package xxl.core;
 
-import xxl.core.exception.InvalidCellException;
+import xxl.core.exception.UnrecognizedEntryException;
 
 public class Reference extends Content{
     
@@ -28,7 +28,7 @@ public class Reference extends Content{
         
         try{
             return _spreadsheet.getCell(_row, _column).value();
-        }catch (InvalidCellException ice){
+        }catch (UnrecognizedEntryException uee){
             System.err.println("Error in Reference class. Invalid cell referenced: " + _row + ";" + _column);    
         }
         

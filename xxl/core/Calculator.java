@@ -134,7 +134,6 @@ public class Calculator implements Serializable {
   public Spreadsheet createSpreadsheet(int rows, int columns){
     _spreadsheet = new Spreadsheet(rows, columns);
     return _spreadsheet;
-  //FIXME implement stuff regarding User
   }
 
 

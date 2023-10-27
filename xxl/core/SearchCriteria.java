@@ -2,7 +2,7 @@ package xxl.core;
 
 /**
  * Universal interface designed to integrate diverse search criteria across 
- * the program's different search features, ensuring extensibility for future additions.
+ * the program's search feature, ensuring extensibility for future desired lookups.
  */
 public interface SearchCriteria {
     

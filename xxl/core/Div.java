@@ -2,6 +2,9 @@ package xxl.core;
 
 import xxl.core.exception.UnsupportedConversionException;
 
+/*
+ * Class that represents the DIV function.
+ */
 public class Div extends BinaryFunction{
     
     public Div(Content arg1, Content arg2){
