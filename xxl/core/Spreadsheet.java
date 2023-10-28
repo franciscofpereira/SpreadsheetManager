@@ -2,6 +2,7 @@ package xxl.core;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class Spreadsheet implements Serializable {
   private boolean _changed;
   private boolean _unsaved;
   private CutBuffer _cutBuffer = new CutBuffer();
-  //private User _user;
+  private List<User> _users = new ArrayList<>();
 
   public Spreadsheet( int rows, int columns){     
     _numRows = rows;
