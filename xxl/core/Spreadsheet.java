@@ -22,14 +22,15 @@ public class Spreadsheet implements Serializable {
   private CellStorageStrategy _storageStrategy;
   private boolean _changed;
   private boolean _unsaved;
-  private CutBuffer _cutBuffer = new CutBuffer();
+  private CutBuffer _cutBuffer;
   private List<User> _users = new ArrayList<>();
 
   public Spreadsheet( int rows, int columns){     
     _numRows = rows;
     _numColumns = columns;
     _changed = false;
-    _unsaved = true;                                               
+    _unsaved = true;   
+    _cutBuffer = new CutBuffer();                                            
     setStorageStrategy(new TwoDimensionArrayStrategy(rows, columns)); // By default, 2D array strategy is used
     createCells();                                                        
   }
@@ -213,7 +214,10 @@ public class Spreadsheet implements Serializable {
   public void copy(String range) throws UnrecognizedEntryException{
 
     // Each time we call the cut method, the previous cutBuffer content is destroyed
-    if(_cutBuffer.getCells()!=null){_cutBuffer.getCells().clear();}
+    //if(_cutBuffer.getCells()!=null){_cutBuffer.getCells().clear();}
+    _cutBuffer.clearCutBufferViewer();
+    _cutBuffer.getCells().clear();
+    //_cutBuffer = new CutBuffer();
 
     Range cutBufferRange = createRange(range);
 
@@ -239,7 +243,11 @@ public class Spreadsheet implements Serializable {
   public void cut(String range) throws UnrecognizedEntryException{
 
     // Each time we call the cut method, the previous cutBuffer content is destroyed
-    if(_cutBuffer.getCells()!=null){_cutBuffer.getCells().clear();}
+    //if(_cutBuffer.getCells()!=null){_cutBuffer.getCells().clear();}
+
+    _cutBuffer.clearCutBufferViewer();
+    _cutBuffer.getCells().clear();
+    //_cutBuffer = new CutBuffer();
     
     Range cutBufferRange = createRange(range);
 

@@ -35,7 +35,10 @@ class DoInsert extends Command<Spreadsheet> {
             _receiver.changed();
         } catch (UnrecognizedFunctionException ufe) {
             // If the content is an inexistent function, throws UnknownFunctionException
-            throw new UnknownFunctionException(stringField("content"));
+            // Removes the '=' character and then split by '('
+            String[] parts = stringField("content").substring(1).split("\\(");
+            String functionName = parts[0];
+            throw new UnknownFunctionException(functionName);
         } catch(UnrecognizedEntryException uee ){
           // If the content is not a function, but it is still invalid, prints error message on the screen.
             System.err.println("Contéudo especificado é desconhecido: " + stringField("content"));

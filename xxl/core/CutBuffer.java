@@ -42,9 +42,15 @@ public class CutBuffer implements Serializable{
         return _cellList;
     }
 
+    public void clearCutBufferViewer(){
+        _cutBufferViewer.clear();
+    }
+
     public List<String> cutBufferViewerBuilder(){
         int row = 1;
         int col = 1;
+
+        clearCutBufferViewer();
 
         if(_type == RangeType.SINGULAR_CELL){
             _cutBufferViewer.add(row + ";" + col + "|" + _cellList.get(0).viewInCutBuffer());

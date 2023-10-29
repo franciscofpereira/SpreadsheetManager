@@ -76,5 +76,13 @@ public class Cell implements Serializable{
         }
         return copiedCell;
     }
+
+    public String getContentFunctionName(){
+
+        if(_content instanceof Function)
+            return ((Function)_content).getFunctionName();
+        
+        return null;
+    }
 }
 
