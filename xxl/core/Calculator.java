@@ -50,6 +50,13 @@ public class Calculator implements Serializable {
     return _spreadsheet;
   }
 
+  /**
+   * 
+   * @return List with all Users in the current application.
+   */
+  public List<User> getUsers(){
+    return _users;
+  }
 
   /**
    * Saves the serialized application's state into the file associated to the current network.
@@ -130,8 +137,12 @@ public class Calculator implements Serializable {
    *
    * @param rows number of rows of the spreadsheet
    * @param columns number of columns of the spreadsheet
+   * @throws UnrecognizedEntryException
    */
-  public Spreadsheet createSpreadsheet(int rows, int columns){
+  public Spreadsheet createSpreadsheet(int rows, int columns) throws UnrecognizedEntryException{
+    
+    if(rows > 2*columns)
+      throw new UnrecognizedEntryException("Dimensões inválidas para a folha");
     _spreadsheet = new Spreadsheet(rows, columns);
     return _spreadsheet;
   }

@@ -3,8 +3,10 @@ package xxl.app.main;
 import pt.tecnico.uilib.forms.Form;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
+import xxl.app.exception.InvalidCellRangeException;
 import xxl.core.Calculator;
 import xxl.core.Spreadsheet;
+import xxl.core.exception.UnrecognizedEntryException;
 
 /**
  * Open a new file.
@@ -28,7 +30,11 @@ class DoNew extends Command<Calculator> {
       ds.performCommand();
     }
     
-    @SuppressWarnings("unused")
-    Spreadsheet createsSpreadsheet = _receiver.createSpreadsheet(integerField("Rows"),integerField("Columns") );
+    try{
+      Spreadsheet createsSpreadsheet = _receiver.createSpreadsheet(integerField("Rows"),integerField("Columns") );
+    } catch( UnrecognizedEntryException e){
+      throw new InvalidCellRangeException(integerField("Rows") + ";" + integerField("Columns"));
+    }
+    
   }
 }

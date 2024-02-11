@@ -13,7 +13,8 @@ public class Menu extends pt.tecnico.uilib.menus.Menu {
           new DoOpen(receiver), //
           new DoSave(receiver), //
           new DoOpenEditMenu(receiver), //
-          new DoOpenSearchMenu(receiver) //
+          new DoOpenSearchMenu(receiver), //
+          new DoRemoveUser(receiver)
           );
   }
 }
